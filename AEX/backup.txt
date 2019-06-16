@@ -1,0 +1,8 @@
+#!/bin/bash
+
+echo 'gdrive google drive folder aliases'
+
+export AEXtrlteG='1yTneM3JXB2wvy1rmMolWriHYy-_8axk1'
+echo 'AEXtrlte set'
+
+
