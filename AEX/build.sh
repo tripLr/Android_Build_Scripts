@@ -112,7 +112,7 @@ for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AEXtrlteG $filen
 
 cd $AEXtblte
 filename=$(basename Aosp*.zip)
-mv -v ~/android/AEX/tblte-log.txt $sharedTR/$filename.log
+mv -v ~/android/AEX/tblte-log.txt $sharedTB/$filename.log
 mv -v  $filename*  $sharedTB
 mv -v $kernelTB/Image $sharedTB/$filename.img
 
@@ -128,7 +128,7 @@ for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AEXtblteG $filen
 
 cd $AEXtrlteduos
 filename=$(basename Aosp*.zip)
-mv -v ~/android/AEX/trlteduos-log.txt $sharedTR/$filename.log
+mv -v ~/android/AEX/trlteduos-log.txt $sharedTD/$filename.log
 mv -v  $filename*  $sharedTD
 mv -v $kernelTD/Image $sharedTD/$filename.img
 
