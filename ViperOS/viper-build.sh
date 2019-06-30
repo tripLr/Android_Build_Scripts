@@ -47,7 +47,8 @@ alias build='. $AEXb/build/envsetup.sh'
     #  $1 build.sh -a --all         
 
 # remove room service files
-rm -v $AEXr/*.xml
+cd $AEXr
+rm -v *.xml
 
 # make clean 
 cd $AEXb
@@ -63,33 +64,44 @@ REPO
 # download roomservice files for device or group 
 
 # build for lineageos bases including kernel @ripeedev
-wget -O $AEXr/manifest.xml https://raw.githubusercontent.com/triplr-dev/local_manifests/aex-9.x/trlte.xml
+#wget -O $AEXr/manifest.xml https://raw.githubusercontent.com/triplr-dev/local_manifests/aex-9.x/trlte.xml
 #wget -O $AEXr/manifest.xml https://raw.githubusercontent.com/triplr-dev/local_manifests/aex-9.x/tblte.xml
 #wget -O $AEXr/manifest.xml https://raw.githubusercontent.com/triplr-dev/local_manifests/aex-9.x/trlteduos.xml
-#wget -O $AEXr/AEX.xml https://raw.githubusercontent.com/tripLr/local_manifests/AOSP-9.x_linero/AEX.xml
-#wget -O $AEXr/AEX.xml https://raw.githubusercontent.com/triplr-dev/local_manifests/aex-9.x/master.xml
 
 # build for triplr-dev sources github.com/tripLr.dev
 
 # download group roomservice
 # build for linero kernel 
+
+wget -O $AEXr/AEX.xml https://raw.githubusercontent.com/tripLr/local_manifests/AOSP-9.x_linero/AEX.xml
+
 cd $AEXb
 REPO
 build
-
 # build trlte
 lunch aosp_trlte-userdebug
+#mka bacon -j$(nproc --all) # Build and Make
+#mka bacon -j32 # Build and Make
 mka aex -j$(nproc --all) | tee trlte-log.txt
 
 # build tblte
+REPO
+build
 lunch aosp_tblte-userdebug
+#mka bacon -j$(nproc --all) # Build and Make
+#mka bacon -j32 # Build and Make
 mka aex -j$(nproc --all) | tee tblte-log.txt
 
 # build trlteduos
+REPO
+build
 lunch aosp_trlteduos-userdebug
+#mka bacon -j$(nproc --all) # Build and Make
+#mka bacon -j32 # Build and Make
 mka aex -j$(nproc --all) | tee trlteduos-log.txt
 
 # Begin copy to shared and upload trlte
+
 # copy and upload trlte 
 
 cd $AEXtrlte
@@ -103,14 +115,10 @@ ls -al
 for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AEXtrlteG $filename && s=0 && break || s=$?; done; (exit $s)
 for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AEXtrlteG $filename.img && s=0 && break || s=$?; done; (exit $s)
 for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AEXtrlteG $filename.md5sum && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AEXtrlteG $filename.log && s=0 && break || s=$?; done; (exit $s)
-
-# Begin copy to shared and upload tblte
-# copy and upload tblte 
 
 cd $AEXtblte
 filename=$(basename Aosp*.zip)
-mv -v ~/android/AEX/tblte-log.txt $sharedTB/$filename.log
+mv -v ~/android/AEX/tblte-log.txt $sharedTR/$filename.log
 mv -v  $filename*  $sharedTB
 mv -v $kernelTB/Image $sharedTB/$filename.img
 
@@ -119,14 +127,10 @@ ls -al
 for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AEXtblteG $filename && s=0 && break || s=$?; done; (exit $s)
 for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AEXtblteG $filename.img && s=0 && break || s=$?; done; (exit $s)
 for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AEXtblteG $filename.md5sum && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AEXtblteG $filename.log && s=0 && break || s=$?; done; (exit $s)
-
-# Begin copy to shared and upload trlteduos
-# copy and upload trlteduos
 
 cd $AEXtrlteduos
 filename=$(basename Aosp*.zip)
-mv -v ~/android/AEX/trlteduos-log.txt $sharedTD/$filename.log
+mv -v ~/android/AEX/trlteduos-log.txt $sharedTR/$filename.log
 mv -v  $filename*  $sharedTD
 mv -v $kernelTD/Image $sharedTD/$filename.img
 
@@ -135,5 +139,4 @@ ls -al
 for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AEXtrlteduosG $filename && s=0 && break || s=$?; done; (exit $s)
 for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AEXtrlteduosG $filename.img && s=0 && break || s=$?; done; (exit $s)
 for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AEXtrlteduosG $filename.md5sum && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AEXtrlteduosG $filename.log  && s=0 && break || s=$?; done; (exit $s)
 
