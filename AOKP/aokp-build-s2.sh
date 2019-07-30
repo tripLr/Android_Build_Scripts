@@ -8,9 +8,9 @@
 . ~/bin/gdrive_aliases.sh
 
 # Set build and directory parameters
-export AEXb='/home/triplr/android/AEX'
-export AEXr='/home/triplr/android/AEX/.repo/local_manifests'
-export build_dir="/ssd_home/OUT_DIR"
+export AEXb=~/android/AEX/
+export AEXr=~/android/AEX/.repo/local_manifests
+export build_dir=$OUT_DIR_COMMON_BASE
 
 #trlte out
 export AEXtrlte="$build_dir/AEX/target/product/trlte"
@@ -39,7 +39,7 @@ rm -v $AEXr/*.xml
 cd $AEXb
 make clean
 # reset repo with no roomservices
-REPO
+repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
 # download roomservice files for device or group 
 #wget -O $AEXr/manifest.xml https://raw.githubusercontent.com/triplr-dev/local_manifests/aex-9.x/trlte.xml
 #wget -O $AEXr/manifest.xml https://raw.githubusercontent.com/triplr-dev/local_manifests/aex-9.x/tblte.xml
@@ -51,8 +51,8 @@ wget -O $AEXr/AEX.xml https://raw.githubusercontent.com/triplr-dev/local_manifes
 # download group roomservice
 # build for linero kernel 
 cd $AEXb
-REPO
-build
+repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
+. build/envsetup.sh
 # build trlte
 lunch aosp_trlte-userdebug
 mka aex -j$(nproc --all) | tee trlte-log.txt

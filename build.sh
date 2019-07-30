@@ -8,60 +8,62 @@
 . ~/bin/gdrive_aliases.sh
 
 # Set build and directory parameters
-export AEXb='/home/triplr/android/AEX'
-export AEXr='/home/triplr/android/AEX/.repo/local_manifests'
-export build_dir="/ssd_home/OUT_DIR"
+export BUILDd=~/android/AEX/
+export ROOMd=~/android/AEX/.repo/local_manifests
+if 
+   [ ! -d $ROOMd ];
+	 then
+    mkdir -pv $ROOMd ;
+         else
+    echo ' roomservice dir exists ' 
+fi
+
+export out_dir=$OUT_DIR_COMMON_BASE
+
 
 #trlte out
-export AEXtrlte="$build_dir/AEX/target/product/trlte"
-export kernelTR="$build_dir/AEX/target/product/trlte/obj/KERNEL_OBJ/arch/arm/boot"
+export AEXtrlte="$out_dir/AEX/target/product/trlte"
+export kernelTR="$out_dir/AEX/target/product/trlte/obj/KERNEL_OBJ/arch/arm/boot"
 
 # tblte out
-export AEXtblte="$build_dir/AEX/target/product/tblte"
-export kernelTB="$build_dir/AEX/target/product/tblte/obj/KERNEL_OBJ/arch/arm/boot"
+export AEXtblte="$out_dir/AEX/target/product/tblte"
+export kernelTB="$out_dir/AEX/target/product/tblte/obj/KERNEL_OBJ/arch/arm/boot"
 
 # trlteduos out
-export AEXtrlteduos="$build_dir/AEX/target/product/trlteduos"
-export kernelTD="$build_dir/AEX/target/product/trlteduos/obj/KERNEL_OBJ/arch/arm/boot"
+export AEXtrlteduos="$out_dir/AEX/target/product/trlteduos"
+export kernelTD="$out_dir/AEX/target/product/trlteduos/obj/KERNEL_OBJ/arch/arm/boot"
 
 # copy finished compiles to internal RAID storage on server
 export sharedTR='/home/shared/triplr/builds/AEX_trlte'
 export sharedTB='/home/shared/triplr/builds/AEX_tblte'
 export sharedTD='/home/shared/triplr/builds/AEX_trlteduos'
 
-# build aliases  
-alias REPO='repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags'
-alias build='. build/envsetup.sh'
-
 # remove room service files
-rm -v $AEXr/*.xml
-# make clean 
-cd $AEXb
-make clean
-# reset repo with no roomservices
-REPO
-# download roomservice files for device or group 
-#wget -O $AEXr/manifest.xml https://raw.githubusercontent.com/triplr-dev/local_manifests/aex-9.x/trlte.xml
-#wget -O $AEXr/manifest.xml https://raw.githubusercontent.com/triplr-dev/local_manifests/aex-9.x/tblte.xml
-#wget -O $AEXr/manifest.xml https://raw.githubusercontent.com/triplr-dev/local_manifests/aex-9.x/trlteduos.xml
-#wget -O $AEXr/AEX.xml https://raw.githubusercontent.com/tripLr/local_manifests/AOSP-9.x_linero/AEX.xml
-# build for triplr-dev sources github.com/tripLr-dev
-wget -O $AEXr/AEX.xml https://raw.githubusercontent.com/triplr-dev/local_manifests/aex-9.x/master.xml
+rm -v $ROOMd/*.xml
 
-# download group roomservice
-# build for linero kernel 
-cd $AEXb
-REPO
-build
+# make clean 
+cd $BUILDd
+make clean
+
+# install from web roomservice
+wget -O $ROOMd/AEX.xml https://raw.githubusercontent.com/triplr-dev/local_manifests/aex-9.x/master.xml
+repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
+
+# set environment for build 
+. build/envsetup.sh
+
 # build trlte
 lunch aosp_trlte-userdebug
 mka aex -j$(nproc --all) | tee trlte-log.txt
+
 # build tblte
 lunch aosp_tblte-userdebug
 mka aex -j$(nproc --all) | tee tblte-log.txt
+
 # build trlteduos
 lunch aosp_trlteduos-userdebug
 mka aex -j$(nproc --all) | tee trlteduos-log.txt
+
 # Begin copy to shared and upload trlte
 cd $AEXtrlte
 ls -al
@@ -89,7 +91,6 @@ for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AEXtblteG $filen
 for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AEXtblteG $filename.md5sum && s=0 && break || s=$?; done; (exit $s)
 for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AEXtblteG $filename.log && s=0 && break || s=$?; done; (exit $s)
 # Begin copy to shared and upload trlteduos
-# copy and upload trlteduos
 cd $AEXtrlteduos
 ls -al
 filename=$(basename Aosp*.zip)
@@ -103,4 +104,3 @@ for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AEXtrlteduosG $f
 for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AEXtrlteduosG $filename.md5sum && s=0 && break || s=$?; done; (exit $s)
 for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AEXtrlteduosG $filename.log  && s=0 && break || s=$?; done; (exit $s)
 cd $AEXb
-
