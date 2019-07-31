@@ -22,16 +22,16 @@ fi
 export out_dir=$OUT_DIR_COMMON_BASE
 
 # trlte out
-export VIPERtrlte="$out_dir/target/product/trlte"
-export kernelTR="$out_dir/target/product/trlte/obj/KERNEL_OBJ/arch/arm/boot"
+export VIPERtrlte="$out_dir/VIPER/target/product/trlte"
+export kernelTR="$out_dir/VIPER/target/product/trlte/obj/KERNEL_OBJ/arch/arm/boot"
 
 # tblte out
-export VIPERtblte="$out_dir/target/product/tblte"
-export kernelTB="$out_dir/target/product/tblte/obj/KERNEL_OBJ/arch/arm/boot"
+export VIPERtblte="$out_dir/VIPER/target/product/tblte"
+export kernelTB="$out_dir/VIPER/target/product/tblte/obj/KERNEL_OBJ/arch/arm/boot"
 
 # trlteduos out
-export VIPERtrlteduos="$out_dir/target/product/trlteduos"
-export kernelTD="$out_dir/target/product/trlteduos/obj/KERNEL_OBJ/arch/arm/boot'"
+export VIPERtrlteduos="$out_dir/VIPER/target/product/trlteduos"
+export kernelTD="$out_dir/target/VIPER/product/trlteduos/obj/KERNEL_OBJ/arch/arm/boot'"
 
 # copy finished compiles to internal RAID storage on server
 export sharedTR='/home/shared/triplr/builds/VIPER_trlte'
@@ -68,7 +68,7 @@ mka poison -j$(nproc --all) | tee trlteduos-log.txt
 cd $VIPERtrlte
 ls -al
 filename=$(basename Viper*.zip) 
-mv -v ~/android/VIPER/trlte-log.txt $sharedTR/$filename.log
+mv -v $BUILDd/trlte-log.txt $sharedTR/$filename.log
 mv -v  $filename*  $sharedTR
 mv -v $kernelTR/Image $sharedTR/$filename.img
 cd $sharedTR
@@ -81,7 +81,7 @@ for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $VIPERtrlteG $fil
 cd $VIPERtblte
 ls -al
 filename=$(basename Viper*.zip)
-mv -v ~/android/VIPER/tblte-log.txt $sharedTR/$filename.log
+mv -v $BUILDd/tblte-log.txt $sharedTR/$filename.log
 mv -v  $filename*  $sharedTB
 mv -v $kernelTB/Image $sharedTB/$filename.img
 cd $sharedTB
@@ -94,7 +94,7 @@ for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $VIPERtblteG $fil
 cd $VIPERtrlteduos
 ls -al
 filename=$(basename Viper*.zip)
-mv -v ~/android/VIPER/trlteduos-log.txt $sharedTR/$filename.log
+mv -v $BUILDd/trlteduos-log.txt $sharedTR/$filename.log
 mv -v  $filename*  $sharedTD
 mv -v $kernelTD/Image $sharedTD/$filename.img
 cd $sharedTD

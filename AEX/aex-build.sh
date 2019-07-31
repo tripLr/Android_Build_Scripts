@@ -8,7 +8,7 @@
 . ~/bin/gdrive_aliases.sh
 
 # Set build and directory parameters
-export BUILDd=~/android/AEX/
+export BUILDd=~/android/AEX
 export ROOMd=~/android/AEX/.repo/local_manifests
 if 
    [ ! -d $ROOMd ];
@@ -67,8 +67,8 @@ mka aex -j$(nproc --all) | tee trlteduos-log.txt
 # Begin copy to shared and upload trlte
 cd $AEXtrlte
 ls -al
-filename=$(basename Aosp*.zip) 
-mv -v ~/android/AEX/trlte-log.txt $sharedTR/$filename.log
+filename=$(basename Aosp*unofficial*.zip) 
+mv -v $BUILDd/trlte-log.txt $sharedTR/$filename.log
 mv -v  $filename*  $sharedTR
 mv -v $kernelTR/Image $sharedTR/$filename.img
 cd $sharedTR
@@ -80,8 +80,8 @@ for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AEXtrlteG $filen
 # Begin copy to shared and upload tblte
 cd $AEXtblte
 ls -al
-filename=$(basename Aosp*.zip)
-mv -v ~/android/AEX/tblte-log.txt $sharedTB/$filename.log
+filename=$(basename Aosp*unofficial*.zip)
+mv -v $BUILDd/tblte-log.txt $sharedTB/$filename.log
 mv -v  $filename*  $sharedTB
 mv -v $kernelTB/Image $sharedTB/$filename.img
 cd $sharedTB
@@ -93,8 +93,8 @@ for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AEXtblteG $filen
 # Begin copy to shared and upload trlteduos
 cd $AEXtrlteduos
 ls -al
-filename=$(basename Aosp*.zip)
-mv -v ~/android/AEX/trlteduos-log.txt $sharedTD/$filename.log
+filename=$(basename Aosp*unofficial*.zip)
+mv -v $BUILDd/trlteduos-log.txt $sharedTD/$filename.log
 mv -v  $filename*  $sharedTD
 mv -v $kernelTD/Image $sharedTD/$filename.img
 cd $sharedTD
@@ -103,4 +103,4 @@ for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AEXtrlteduosG $f
 for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AEXtrlteduosG $filename.img && s=0 && break || s=$?; done; (exit $s)
 for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AEXtrlteduosG $filename.md5sum && s=0 && break || s=$?; done; (exit $s)
 for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AEXtrlteduosG $filename.log  && s=0 && break || s=$?; done; (exit $s)
-cd $AEXb
+cd $BUILDd
