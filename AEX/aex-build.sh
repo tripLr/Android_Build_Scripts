@@ -67,7 +67,7 @@ mka aex -j$(nproc --all) | tee trlteduos-log.txt
 # Begin copy to shared and upload trlte
 cd $AEXtrlte
 ls -al
-filename=$(basename Aosp*unofficial*.zip) 
+filename=$(basename Aosp*.zip) 
 mv -v $BUILDd/trlte-log.txt $sharedTR/$filename.log
 mv -v  $filename*  $sharedTR
 mv -v $kernelTR/Image $sharedTR/$filename.img
@@ -80,7 +80,7 @@ for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AEXtrlteG $filen
 # Begin copy to shared and upload tblte
 cd $AEXtblte
 ls -al
-filename=$(basename Aosp*unofficial*.zip)
+filename=$(basename Aosp*.zip)
 mv -v $BUILDd/tblte-log.txt $sharedTB/$filename.log
 mv -v  $filename*  $sharedTB
 mv -v $kernelTB/Image $sharedTB/$filename.img
@@ -93,7 +93,7 @@ for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AEXtblteG $filen
 # Begin copy to shared and upload trlteduos
 cd $AEXtrlteduos
 ls -al
-filename=$(basename Aosp*unofficial*.zip)
+filename=$(basename Aosp*.zip)
 mv -v $BUILDd/trlteduos-log.txt $sharedTD/$filename.log
 mv -v  $filename*  $sharedTD
 mv -v $kernelTD/Image $sharedTD/$filename.img

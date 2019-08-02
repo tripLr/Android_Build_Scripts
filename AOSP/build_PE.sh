@@ -1,4 +1,4 @@
-# Script to Build and Upload Pixel TRLTE
+# Scrpt to Buld and Upload Pixel TRLTE
 # Set Global Parameters
 # Server Specific compile settings
 . ~/bin/compile.sh
@@ -67,7 +67,7 @@ mka bacon -j$(nproc --all) | tee trlteduos-log.txt
 # Begin copy to shared and upload trlte
 cd $Pixeltrlte
 ls -al
-filename=$(basename aosp*unofficial*.zip) 
+filename=$(basename PixelExperience*.zip) 
 mv -v $BUILDd/trlte-log.txt $sharedTR/$filename.log
 mv -v  $filename*  $sharedTR
 mv -v $kernelTR/Image $sharedTR/$filename.img
@@ -80,7 +80,7 @@ for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $PixeltrlteG $fil
 # Begin copy to shared and upload tblte
 cd $Pixeltblte
 ls -al
-filename=$(basename aosp*unofficial*.zip)
+filename=$(basename PixelExperience*.zip) 
 mv -v $BUILDd/tblte-log.txt $sharedTB/$filename.log
 mv -v  $filename*  $sharedTB
 mv -v $kernelTB/Image $sharedTB/$filename.img
@@ -93,7 +93,7 @@ for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $PixeltblteG $fil
 # Begin copy to shared and upload trlteduos
 cd $Pixeltrlteduos
 ls -al
-filename=$(basename aosp*unofficial*.zip)
+filename=$(basename PixelExperience*.zip) 
 mv -v $BUILDd/trlteduos-log.txt $sharedTD/$filename.log
 mv -v  $filename*  $sharedTD
 mv -v $kernelTD/Image $sharedTD/$filename.img
