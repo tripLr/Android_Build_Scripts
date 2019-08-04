@@ -7,17 +7,6 @@
 # do not publish file, internal use only
 . ~/bin/gdrive_aliases.sh
 
-# Set build and directory parameters
-export BUILDd=~/android/XENONHD
-export ROOMd=~/android/XENONHD/.repo/local_manifests
-if 
-   [ ! -d $ROOMd ];
-	 then
-    mkdir -pv $ROOMd ;
-         else
-    echo ' roomservice dir exists ' 
-fi
-
 export out_dir=$OUT_DIR_COMMON_BASE
 
 
@@ -56,10 +45,10 @@ repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
 brunch trlte | tee trlte-log.txt 
 
 # build tblte
-brunch tblte | tee trlte-log.txt 
+brunch tblte | tee tblte-log.txt 
 
 # build trlteduos
-brunch trlteduos | tee trlte-log.txt 
+brunch trlteduos | tee trlteduos-log.txt 
 
 # Begin copy to shared and upload trlte
 cd $XENONHDtrlte
