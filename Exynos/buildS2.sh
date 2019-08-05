@@ -19,12 +19,13 @@ fi
 export out_dir=$OUT_DIR_COMMON_BASE
 #roomservices
 # @inkypen # github.com/exynos5433
-export r710=https://raw.githubusercontent.com/Exynos5433/local_manifests/aokp-oreo/gts28wifi.xml
-export r715=https://raw.githubusercontent.com/Exynos5433/local_manifests/aokp-oreo/gts28ltexx.xml
-export r810=https://raw.githubusercontent.com/Exynos5433/local_manifests/aokp-oreo/gts210wifi.xml
-export r815=https://raw.githubusercontent.com/Exynos5433/local_manifests/aokp-oreo/gts210ltexx.xml
+#export r710=https://raw.githubusercontent.com/Exynos5433/local_manifests/aokp-oreo/gts28wifi.xml
+#export r715=https://raw.githubusercontent.com/Exynos5433/local_manifests/aokp-oreo/gts28ltexx.xml
+#export r810=https://raw.githubusercontent.com/Exynos5433/local_manifests/aokp-oreo/gts210wifi.xml
+#export r815=https://raw.githubusercontent.com/Exynos5433/local_manifests/aokp-oreo/gts210ltexx.xml
 #triplr
 # github.com/triplr/
+export MasterR=https://raw.githubusercontent.com/tripLr/Exynos5433_manifests/aokp-oreo/master_gts2.xml
 
 #710 out gts28wifi
 export AOKP710b=$out_dir/AOKP_oreo/target/product/gts28wifi
@@ -55,31 +56,23 @@ REPO
 cd $BUILDd
 make clean
 
-# build gts28wifi T710
-wget -O $ROOMd/AOKP_oreo.xml $r710	 
-repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
+# build all
+wget -O $ROOMd/AOKP_oreo.xml $MasterR	 
+REPO
 . build/envsetup.sh
+
 lunch aokp_gts28wifi-userdebug
 mka rainbowfarts -j$(nproc --all) | tee gts28wifi-log.txt
 
 # build gts28ltexx T715
-wget -O $ROOMd/AOKP_oreo.xml $r715
-repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
-. build/envsetup.sh
 lunch aokp_gts28ltexx-userdebug
 mka rainbowfarts -j$(nproc --all) | tee gts28ltexx-log.txt
 
 # build gts210wifi T-810 
-wget -O $ROOMd/AOKP_oreo.xml $r810
-repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
-. build/envsetup.sh
 lunch aokp_gts210wifi-userdebug
 mka rainbowfarts -j$(nproc --all) | tee gts210wifi-log.txt
 
 # build gts210ltexx T815
-wget -O $ROOMd/AOKP_oreo.xml $r815
-repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
-. build/envsetup.sh
 lunch aokp_gts210ltexx-userdebug
 mka rainbowfarts -j$(nproc --all) | tee gts210ltexx-log.txt
 
@@ -92,10 +85,10 @@ mv -v  $filename*  $shared710
 mv -v $kernel710b/Image $shared710/$filename.img
 cd $shared710
 ls -al
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AOKP710 $filename && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AOKP710 $filename.img && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AOKP710 $filename.md5sum && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AOKP710 $filename.log && s=0 && break || s=$?; done; (exit $s)
+gdrive upload --parent $AOKP710 $filename 
+gdrive upload --parent $AOKP710 $filename.img 
+gdrive upload --parent $AOKP710 $filename.md5sum 
+gdrive upload --parent $AOKP710 $filename.log 
 
 # Begin copy to shared and upload tblte
 cd $AOKP715b
@@ -106,10 +99,10 @@ mv -v  $filename*  $shared715
 mv -v $kernel715b/Image $shared715/$filename.img
 cd $shared715
 ls -al
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AOKP715 $filename && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AOKP715 $filename.img && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AOKP715 $filename.md5sum && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AOKP715 $filename.log && s=0 && break || s=$?; done; (exit $s)
+gdrive upload --parent $AOKP715 $filename 
+gdrive upload --parent $AOKP715 $filename.img 
+gdrive upload --parent $AOKP715 $filename.md5sum 
+gdrive upload --parent $AOKP715 $filename.log 
 
 # Begin copy to shared and upload trlteduos
 cd $AOKP810b
@@ -120,10 +113,10 @@ mv -v  $filename*  $shared810
 mv -v $kernel810b/Image $shared810/$filename.img
 cd $shared810
 ls -al
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AOKP810 $filename && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AOKP810 $filename.img && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AOKP810 $filename.md5sum && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AOKP810 $filename.log  && s=0 && break || s=$?; done; (exit $s)
+gdrive upload --parent $AOKP810 $filename 
+gdrive upload --parent $AOKP810 $filename.img 
+gdrive upload --parent $AOKP810 $filename.md5sum 
+gdrive upload --parent $AOKP810 $filename.log  
 
 cd $AOKP815b
 ls -al
@@ -133,9 +126,9 @@ mv -v  $filename*  $shared815
 mv -v $kernel815b/Image $shared815/$filename.img
 cd $shared815
 ls -al
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AOKP815 $filename && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AOKP815 $filename.img && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AOKP815 $filename.md5sum && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AOKP815 $filename.log  && s=0 && break || s=$?; done; (exit $s)
+gdrive upload --parent $AOKP815 $filename 
+gdrive upload --parent $AOKP815 $filename.img 
+gdrive upload --parent $AOKP815 $filename.md5sum 
+gdrive upload --parent $AOKP815 $filename.log  
 
 cd $BUILDd
