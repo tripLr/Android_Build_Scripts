@@ -19,7 +19,7 @@ if
 fi
 
 export out_dir=$OUT_DIR_COMMON_BASE
-
+export ROOMs=https://raw.githubusercontent.com/triplr-dev/local_manifests/aex-9.x/master.xml
 
 #trlte out
 export AEXtrlte="$out_dir/AEX/target/product/trlte"
@@ -38,16 +38,21 @@ export sharedTR='/home/shared/triplr/builds/AEX_trlte'
 export sharedTB='/home/shared/triplr/builds/AEX_tblte'
 export sharedTD='/home/shared/triplr/builds/AEX_trlteduos'
 
+cd $BUILDd
+make clean && make clobber
+
 # remove room service files
 rm -v $ROOMd/*.xml
-
+# reset repo remove all devices
+# repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
 # make clean 
-cd $BUILDd
-make clean
+# these 2 steps cleans all the old source code for your device
+repo sync -c --force-sync --no-clone-bundle --no-tags
 
 # install from web roomservice
-wget -O $ROOMd/AEX.xml https://raw.githubusercontent.com/triplr-dev/local_manifests/aex-9.x/master.xml
-repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
+wget -O $ROOMd/AEX.xml $ROOMs
+#repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
+repo sync -c --force-sync --no-clone-bundle --no-tags
 
 # set environment for build 
 . build/envsetup.sh
@@ -73,10 +78,10 @@ mv -v  $filename*  $sharedTR
 mv -v $kernelTR/Image $sharedTR/$filename.img
 cd $sharedTR
 ls -al
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AEXtrlteG $filename && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AEXtrlteG $filename.img && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AEXtrlteG $filename.md5sum && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AEXtrlteG $filename.log && s=0 && break || s=$?; done; (exit $s)
+gdrive upload --parent $AEXtrlteG $filename 
+gdrive upload --parent $AEXtrlteG $filename.img 
+gdrive upload --parent $AEXtrlteG $filename.md5sum 
+gdrive upload --parent $AEXtrlteG $filename.log 
 # Begin copy to shared and upload tblte
 cd $AEXtblte
 ls -al
@@ -86,10 +91,10 @@ mv -v  $filename*  $sharedTB
 mv -v $kernelTB/Image $sharedTB/$filename.img
 cd $sharedTB
 ls -al
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AEXtblteG $filename && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AEXtblteG $filename.img && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AEXtblteG $filename.md5sum && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AEXtblteG $filename.log && s=0 && break || s=$?; done; (exit $s)
+gdrive upload --parent $AEXtblteG $filename 
+gdrive upload --parent $AEXtblteG $filename.img 
+gdrive upload --parent $AEXtblteG $filename.md5sum 
+gdrive upload --parent $AEXtblteG $filename.log 
 # Begin copy to shared and upload trlteduos
 cd $AEXtrlteduos
 ls -al
@@ -99,8 +104,8 @@ mv -v  $filename*  $sharedTD
 mv -v $kernelTD/Image $sharedTD/$filename.img
 cd $sharedTD
 ls -al
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AEXtrlteduosG $filename && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AEXtrlteduosG $filename.img && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AEXtrlteduosG $filename.md5sum && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $AEXtrlteduosG $filename.log  && s=0 && break || s=$?; done; (exit $s)
+gdrive upload --parent $AEXtrlteduosG $filename 
+gdrive upload --parent $AEXtrlteduosG $filename.img 
+gdrive upload --parent $AEXtrlteduosG $filename.md5sum 
+gdrive upload --parent $AEXtrlteduosG $filename.log 
 cd $BUILDd

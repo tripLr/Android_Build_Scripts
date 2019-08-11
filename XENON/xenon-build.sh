@@ -9,6 +9,18 @@
 
 export out_dir=$OUT_DIR_COMMON_BASE
 
+# Set build and directory parameters
+export BUILDd=~/android/XENONHD
+export ROOMd=~/android/XENONHD/.repo/local_manifests
+if 
+   [ ! -d $ROOMd ];
+         then
+    mkdir -pv $ROOMd ;
+         else
+    echo ' roomservice dir exists ' 
+fi
+
+cd $BUILDd
 
 #trlte out
 export XENONHDtrlte="$out_dir/XENONHD/target/product/trlte"
@@ -26,6 +38,8 @@ export kernelTD="$out_dir/XENONHD/target/product/trlteduos/obj/KERNEL_OBJ/arch/a
 export sharedTR='/home/shared/triplr/builds/XENONHD_trlte'
 export sharedTB='/home/shared/triplr/builds/XENONHD_tblte'
 export sharedTD='/home/shared/triplr/builds/XENONHD_trlteduos'
+export ROOMs=https://raw.githubusercontent.com/triplr-dev/local_manifests/xenonhd-p/master.xml
+export REPOd='repo init -u https://github.com/TeamHorizon/platform_manifest.git -b p'
 
 # remove room service files
 rm -v $ROOMd/*.xml
@@ -35,19 +49,22 @@ cd $BUILDd
 make clean
 
 # install from web roomservice
-wget -O $ROOMd/XenonHD.xml https://raw.githubusercontent.com/triplr-dev/local_manifests/xenonhd-p/master.xml
+wget -O $ROOMd/XenonHD.xml $ROOMs
 repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
 
 # set environment for build 
 . build/envsetup.sh
 
 # build trlte
+breakfast trlte 
 brunch trlte | tee trlte-log.txt 
 
 # build tblte
+breakfast tblte 
 brunch tblte | tee tblte-log.txt 
 
 # build trlteduos
+breakfast trlteduos 
 brunch trlteduos | tee trlteduos-log.txt 
 
 # Begin copy to shared and upload trlte

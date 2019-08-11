@@ -19,16 +19,16 @@ fi
 export out_dir=$OUT_DIR_COMMON_BASE
 
 # trlte out
-export VIPERtrlte="$out_dir/VIPER/target/product/trlte"
-export kernelTR="$out_dir/VIPER/target/product/trlte/obj/KERNEL_OBJ/arch/arm/boot"
+export VIPERtrlte=$out_dir/VIPER/target/product/trlte
+export kernelTR=$out_dir/VIPER/target/product/trlte/obj/KERNEL_OBJ/arch/arm/boot
 
 # tblte out
-export VIPERtblte="$out_dir/VIPER/target/product/tblte"
-export kernelTB="$out_dir/VIPER/target/product/tblte/obj/KERNEL_OBJ/arch/arm/boot"
+export VIPERtblte=$out_dir/VIPER/target/product/tblte
+export kernelTB=$out_dir/VIPER/target/product/tblte/obj/KERNEL_OBJ/arch/arm/boot
 
 # trlteduos out
-export VIPERtrlteduos="$out_dir/VIPER/target/product/trlteduos"
-export kernelTD="$out_dir/target/VIPER/product/trlteduos/obj/KERNEL_OBJ/arch/arm/boot'"
+export VIPERtrlteduos=$out_dir/VIPER/target/product/trlteduos
+export kernelTD=$out_dir/VIPER/target/product/trlteduos/obj/KERNEL_OBJ/arch/arm/boot
 
 # copy finished compiles to internal RAID storage on server
 export sharedTR='/home/shared/triplr/builds/VIPER_trlte'
@@ -81,10 +81,10 @@ mv -v  $filename*  $sharedTR
 mv -v $kernelTR/Image $sharedTR/$filename.img
 cd $sharedTR
 ls -al
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $VIPERtrlteG $filename && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $VIPERtrlteG $filename.img && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $VIPERtrlteG $filename.md5sum && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $VIPERtrlteG $filename.log && s=0 && break || s=$?; done; (exit $s)
+gdrive upload --parent $VIPERtrlteG $filename 
+gdrive upload --parent $VIPERtrlteG $filename.img 
+gdrive upload --parent $VIPERtrlteG $filename.md5sum 
+gdrive upload --parent $VIPERtrlteG $filename.log 
 # Begin copy to shared and upload tblte
 cd $VIPERtblte
 ls -al
@@ -94,10 +94,10 @@ mv -v  $filename*  $sharedTB
 mv -v $kernelTB/Image $sharedTB/$filename.img
 cd $sharedTB
 ls -al
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $VIPERtblteG $filename && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $VIPERtblteG $filename.img && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $VIPERtblteG $filename.md5sum && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $VIPERtblteG $filename.log && s=0 && break || s=$?; done; (exit $s)
+gdrive upload --parent $VIPERtblteG $filename 
+gdrive upload --parent $VIPERtblteG $filename.img 
+gdrive upload --parent $VIPERtblteG $filename.md5sum 
+gdrive upload --parent $VIPERtblteG $filename.log 
 # Begin copy to shared and upload trlteduos
 cd $VIPERtrlteduos
 ls -al
@@ -107,8 +107,8 @@ mv -v  $filename*  $sharedTD
 mv -v $kernelTD/Image $sharedTD/$filename.img
 cd $sharedTD
 ls -al
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $VIPERtrlteduosG $filename && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $VIPERtrlteduosG $filename.img && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $VIPERtrlteduosG $filename.md5sum && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $VIPERtrlteduosG $filename.log && s=0 && break || s=$?; done; (exit $s)
+gdrive upload --parent $VIPERtrlteduosG $filename 
+gdrive upload --parent $VIPERtrlteduosG $filename.img 
+gdrive upload --parent $VIPERtrlteduosG $filename.md5sum
+gdrive upload --parent $VIPERtrlteduosG $filename.log 
 cd $BUILDd
