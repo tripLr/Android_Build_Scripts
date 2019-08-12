@@ -20,7 +20,6 @@ fi
 
 export out_dir=$OUT_DIR_COMMON_BASE
 
-
 #trlte out
 export Pixeltrlte="$out_dir/Pixel/target/product/trlte"
 export kernelTR="$out_dir/Pixel/target/product/trlte/obj/KERNEL_OBJ/arch/arm/boot"
@@ -73,10 +72,9 @@ mv -v  $filename*  $sharedTR
 mv -v $kernelTR/Image $sharedTR/$filename.img
 cd $sharedTR
 ls -al
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $PixeltrlteG $filename && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $PixeltrlteG $filename.img && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $PixeltrlteG $filename.md5sum && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $PixeltrlteG $filename.log && s=0 && break || s=$?; done; (exit $s)
+gdrive upload --parent $PixeltrlteG $filename 
+gdrive upload --parent $PixeltrlteG $filename.img 
+gdrive upload --parent $PixeltrlteG $filename.md5sum 
 # Begin copy to shared and upload tblte
 cd $Pixeltblte
 ls -al
@@ -86,10 +84,9 @@ mv -v  $filename*  $sharedTB
 mv -v $kernelTB/Image $sharedTB/$filename.img
 cd $sharedTB
 ls -al
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $PixeltblteG $filename && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $PixeltblteG $filename.img && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $PixeltblteG $filename.md5sum && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $PixeltblteG $filename.log && s=0 && break || s=$?; done; (exit $s)
+gdrive upload --parent $PixeltblteG $filename 
+gdrive upload --parent $PixeltblteG $filename.img 
+gdrive upload --parent $PixeltblteG $filename.md5sum 
 # Begin copy to shared and upload trlteduos
 cd $Pixeltrlteduos
 ls -al
@@ -99,8 +96,7 @@ mv -v  $filename*  $sharedTD
 mv -v $kernelTD/Image $sharedTD/$filename.img
 cd $sharedTD
 ls -al
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $PixeltrlteduosG $filename && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $PixeltrlteduosG $filename.img && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $PixeltrlteduosG $filename.md5sum && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $PixeltrlteduosG $filename.log  && s=0 && break || s=$?; done; (exit $s)
+gdrive upload --parent $PixeltrlteduosG $filename 
+gdrive upload --parent $PixeltrlteduosG $filename.img 
+gdrive upload --parent $PixeltrlteduosG $filename.md5sum 
 cd $Pixelb

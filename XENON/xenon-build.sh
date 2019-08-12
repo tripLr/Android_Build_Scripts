@@ -39,7 +39,6 @@ export sharedTR='/home/shared/triplr/builds/XENONHD_trlte'
 export sharedTB='/home/shared/triplr/builds/XENONHD_tblte'
 export sharedTD='/home/shared/triplr/builds/XENONHD_trlteduos'
 export ROOMs=https://raw.githubusercontent.com/triplr-dev/local_manifests/xenonhd-p/master.xml
-export REPOd='repo init -u https://github.com/TeamHorizon/platform_manifest.git -b p'
 
 # remove room service files
 rm -v $ROOMd/*.xml
@@ -50,7 +49,7 @@ make clean
 
 # install from web roomservice
 wget -O $ROOMd/XenonHD.xml $ROOMs
-repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
+repo sync -c --force-sync --no-clone-bundle --no-tags
 
 # set environment for build 
 . build/envsetup.sh
@@ -76,10 +75,9 @@ mv -v  $filename*  $sharedTR
 mv -v $kernelTR/Image $sharedTR/$filename.img
 cd $sharedTR
 ls -al
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $XENONHDtrlteG $filename && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $XENONHDtrlteG $filename.img && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $XENONHDtrlteG $filename.md5sum && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $XENONHDtrlteG $filename.log && s=0 && break || s=$?; done; (exit $s)
+gdrive upload --parent $XENONHDtrlteG $filename 
+gdrive upload --parent $XENONHDtrlteG $filename.img 
+gdrive upload --parent $XENONHDtrlteG $filename.md5sum 
 # Begin copy to shared and upload tblte
 cd $XENONHDtblte
 ls -al
@@ -89,10 +87,9 @@ mv -v  $filename*  $sharedTB
 mv -v $kernelTB/Image $sharedTB/$filename.img
 cd $sharedTB
 ls -al
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $XENONHDtblteG $filename && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $XENONHDtblteG $filename.img && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $XENONHDtblteG $filename.md5sum && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $XENONHDtblteG $filename.log && s=0 && break || s=$?; done; (exit $s)
+gdrive upload --parent $XENONHDtblteG $filename 
+gdrive upload --parent $XENONHDtblteG $filename.img 
+gdrive upload --parent $XENONHDtblteG $filename.md5sum 
 # Begin copy to shared and upload trlteduos
 cd $XENONHDtrlteduos
 ls -al
@@ -102,8 +99,7 @@ mv -v  $filename*  $sharedTD
 mv -v $kernelTD/Image $sharedTD/$filename.img
 cd $sharedTD
 ls -al
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $XENONHDtrlteduosG $filename && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $XENONHDtrlteduosG $filename.img && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $XENONHDtrlteduosG $filename.md5sum && s=0 && break || s=$?; done; (exit $s)
-for i in $(seq 1 50); do [ $i -gt 1 ] ; gdrive upload --parent $XENONHDtrlteduosG $filename.log  && s=0 && break || s=$?; done; (exit $s)
+gdrive upload --parent $XENONHDtrlteduosG $filename 
+gdrive upload --parent $XENONHDtrlteduosG $filename.img 
+gdrive upload --parent $XENONHDtrlteduosG $filename.md5sum 
 cd $XENONHDb

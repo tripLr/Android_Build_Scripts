@@ -35,27 +35,20 @@ export sharedTR='/home/shared/triplr/builds/VIPER_trlte'
 export sharedTB='/home/shared/triplr/builds/VIPER_tblte'
 export sharedTD='/home/shared/triplr/builds/VIPER_trlteduos'
 
-# VIPER
-# trlte         https://drive.google.com/open?id=1GV5UUXWlwEEB8ItaXzFIB1x9ETLb2OU2
-# tblte         https://drive.google.com/open?id=1izQNzbuG69IfO-fnandZVF7RhxFOYmpN
-# trlteduos     https://drive.google.com/open?id=1q4CL-9zU4WME7Lmj2kx7J84O_3-4DC_n
 export VIPERr=https://raw.githubusercontent.com/triplr-dev/local_manifests/viper-pie/master.xml
-export VIPERtrlteG=1GV5UUXWlwEEB8ItaXzFIB1x9ETLb2OU2
-export VIPERtblteG=1izQNzbuG69IfO-fnandZVF7RhxFOYmpN
-export VIPERtrlteduosG=1q4CL-9zU4WME7Lmj2kx7J84O_3-4DC_n
 echo "VIPER sources and Google Drive set"
-
-
-# remove room service files
-rm -v $ROOMd/*.xml
 
 # make clean 
 cd $BUILDd
-make clean
+make clean && make clobber
+
+# remove room service files and sync
+rm -v $ROOMd/*.xml
+repo sync -c --force-sync --no-clone-bundle --no-tags
 
 # download group roomservice https://raw.githubusercontent.com/triplr-dev/local_manifests/viper-pie/master.xml
 wget -O $ROOMd/VIPER.xml $VIPERr #https://raw.githubusercontent.com/triplr-dev/local_manifests/viper-pie/master.xml 
-repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
+repo sync -c --force-sync --no-clone-bundle --no-tags
 
 # set environment for build
 . build/envsetup.sh
