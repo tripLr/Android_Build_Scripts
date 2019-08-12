@@ -42,6 +42,7 @@ export ROOMs=https://raw.githubusercontent.com/triplr-dev/local_manifests/xenonh
 
 # remove room service files
 rm -v $ROOMd/*.xml
+repo sync -c --force-sync --no-clone-bundle --no-tags
 
 # make clean 
 cd $BUILDd
