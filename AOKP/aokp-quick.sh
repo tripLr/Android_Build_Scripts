@@ -41,9 +41,7 @@ export sharedTD='/home/shared/triplr/builds/AOKP_trlteduos'
 # remove room service files
 rm -v $ROOMd/*.xml
 
-# make clean 
 cd $BUILDd
-make clean
 
 # install from web roomservice
 wget -O $ROOMd/AOKP.xml https://raw.githubusercontent.com/triplr-dev/local_manifests/aokp-pie/master.xml
@@ -98,6 +96,6 @@ mv -v $kernelTD/Image $sharedTD/$filename.img
 cd $sharedTD
 ls -al
 gdrive upload --parent $AOKPtrlteduosG $filename 
-gdrive upload --parent $AOKPtrlteduosG $filename.img
+gdrive upload --parent $AOKPtrlteduosG $filename.img 
 gdrive upload --parent $AOKPtrlteduosG $filename.md5sum 
 cd $AOKPb

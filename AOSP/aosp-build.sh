@@ -1,4 +1,8 @@
-# Scrpt to Buld and Upload AOSP TRLTE
+# Script to Build and Upload AOSP TRLTE
+# note need kernel source to include in build to build correctly for pure aosp
+# see inkypens notes
+
+
 # Set Global Parameters
 # Server Specific compile settings
 . ~/bin/compile.sh

@@ -40,17 +40,9 @@ export sharedTB='/home/shared/triplr/builds/AEX_tblte'
 export sharedTD='/home/shared/triplr/builds/AEX_trlteduos'
 
 cd $BUILDd
-make clean && make clobber
 
 # remove room service files
 rm -v $ROOMd/*.xml
-# reset repo remove all devices
-# repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
-# make clean 
-# these 2 steps cleans all the old source code for your device
-repo sync -c --force-sync --no-clone-bundle --no-tags
-
-# install from web roomservice
 wget -O $ROOMd/AEX.xml $ROOMs
 #repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
 repo sync -c --force-sync --no-clone-bundle --no-tags

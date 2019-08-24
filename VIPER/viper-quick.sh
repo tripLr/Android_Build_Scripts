@@ -40,11 +40,9 @@ echo "VIPER sources and Google Drive set"
 
 # make clean 
 cd $BUILDd
-make clean && make clobber
 
 # remove room service files and sync
 rm -v $ROOMd/*.xml
-repo sync -c --force-sync --no-clone-bundle --no-tags
 
 # download group roomservice https://raw.githubusercontent.com/triplr-dev/local_manifests/viper-pie/master.xml
 wget -O $ROOMd/VIPER.xml $VIPERr #https://raw.githubusercontent.com/triplr-dev/local_manifests/viper-pie/master.xml 

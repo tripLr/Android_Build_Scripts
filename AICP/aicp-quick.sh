@@ -39,13 +39,9 @@ export sharedTB='/home/shared/triplr/builds/AICP_tblte'
 export sharedTD='/home/shared/triplr/builds/AICP_trlteduos'
 
 cd $BUILDd
-make clean && make clobber
 
 # remove room service files
 rm -v $ROOMd/*.xml
-
-cd $BUILDd
-repo sync -c --force-sync --no-clone-bundle --no-tags
 
 # install from web roomservice
 wget -O $ROOMd/AICP.xml $ROOMs #https://raw.githubusercontent.com/triplr-dev/local_manifests/aokp-pie/master.xml

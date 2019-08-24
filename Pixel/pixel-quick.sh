@@ -39,12 +39,8 @@ export sharedTD='/home/shared/triplr/builds/Pixel_trlteduos'
 
 # make clean 
 cd $BUILDd
-make clean
 # remove room service files
-rm -v $ROOMd/*.xml
-repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
-
-
+rm $ROOMd/*.xml 
 # install from web roomservice
 wget -O $ROOMd/Pixel.xml https://raw.githubusercontent.com/triplr-dev/local_manifests/aosp-pie/master.xml
 repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
