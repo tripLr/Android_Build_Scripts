@@ -40,7 +40,7 @@ export sharedTB='/home/shared/triplr/builds/AEX_tblte'
 export sharedTD='/home/shared/triplr/builds/AEX_trlteduos'
 
 cd $BUILDd
-make clean && make clobber
+make clean
 
 # remove room service files
 rm -v $ROOMd/*.xml

@@ -4,12 +4,13 @@
 # AOKP			repo init --depth=1 -u https://github.com/AOKP/platform_manifest.git -b pie
 # Google AOSP		repo init -u https://android.googlesource.com/platform/manifest
 # Google branch		repo init --depth=1 -u https://android.googlesource.com/platform/manifest -b android-9.0.0_r47
+# Google branch		repo init --depth=1 -u https://android.googlesource.com/platform/manifest -b android-10.0.0_r2
 # LineageOS		repo init --depth=1 -u git://github.com/LineageOS/android.git -b lineage-16.0
 # Pixel Expierence	repo init --depth=1 -u https://github.com/PixelExperience/manifest -b pie
 # ViperOS		repo init --depth=1 -u https://github.com/ViperOS/viper_manifest.git -b pie
 # xenon 		repo init --depth=1 -u https://github.com/TeamHorizon/platform_manifest.git -b p
 
-export BUILDd=~/android/AOSP
+export BUILDd=~/android/AOSP10
 export INITd=$BUILDd/.repo
 export ROOMd=$BUILDd/.repo/local_manifests
 #
@@ -18,7 +19,7 @@ if
    [ ! -d $INITd ];
    	then
 	mkdir -pv $INITd;
-	repo init --depth=1 -u https://android.googlesource.com/platform/manifest -b android-9.0.0_r4 ;
+	repo init --depth=1 -u https://android.googlesource.com/platform/manifest -b android-10.0.0_r2 ;
 	repo sync -c --force-sync --no-clone-bundle --no-tags	;
 	echo "REPO init and sync complete"		
          else
