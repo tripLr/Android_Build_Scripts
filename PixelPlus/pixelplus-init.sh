@@ -9,7 +9,7 @@
 # ViperOS		repo init --depth=1 -u https://github.com/ViperOS/viper_manifest.git -b pie
 # xenon 		repo init --depth=1 -u https://github.com/TeamHorizon/platform_manifest.git -b p
 
-export BUILDd=~/android/Pixel
+export BUILDd=~/android/PixelPlus
 export INITd=$BUILDd/.repo
 export ROOMd=$BUILDd/.repo/local_manifests
 #
@@ -18,7 +18,7 @@ if
    [ ! -d $INITd ];
    	then
 	mkdir -pv $INITd;
-	repo init --depth=1 -u https://github.com/PixelExperience/manifest -b pie ;
+	repo init --depth=1 -u https://github.com/PixelExperience/manifest -b pie-plus ;
 	repo sync -c --force-sync --no-clone-bundle --no-tags	;
 	echo "REPO init and sync complete"		
          else
