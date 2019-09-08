@@ -5,7 +5,16 @@
 # call google drive folder variables
 # to upload builds to google drive triplr.dev shared account
 # do not publish file, internal use only
-. ../gdrive_aliases.sh 
+if 
+	[ -f ../gdrive_aliases.sh ];
+	  then
+	    cp -v ../gdrive_aliases.sh ~/bin/ ;  
+      	    echo 'file copied '
+	  else
+		echo 'file not found '
+fi
+. ~/bin/gdrive_aliases.sh 
+
 
 # Set build and directory parameters
 export BUILDd=~/android/PixelPlus
@@ -42,12 +51,10 @@ cd $BUILDd
 make clean
 # remove room service files
 rm -v $ROOMd/*.xml
-repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
-
 
 # install from web roomservice
 wget -O $ROOMd/PixelPlus.xml https://raw.githubusercontent.com/triplr-dev/local_manifests/aosp-pie/master.xml
-repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
+repo sync -c -j4 --force-sync --no-clone-bundle --no-tags | tee repo.log
 
 # set environment for build 
 . build/envsetup.sh
@@ -69,6 +76,7 @@ cd $PixelPlustrlte
 ls -al
 filename=$(basename PixelExperience*.zip) 
 mv -v $BUILDd/trlte-log.txt $sharedTR/$filename.log
+mv -v $BUILDd/repo.log $sharedTR/$filename.repo.log
 mv -v  $filename*  $sharedTR
 mv -v $kernelTR/Image $sharedTR/$filename.img
 cd $sharedTR

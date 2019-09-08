@@ -5,6 +5,15 @@
 # call google drive folder variables
 # to upload builds to google drive triplr.dev shared account
 # do not publish file, internal use only
+if 
+	[ -f ../gdrive_aliases.sh ];
+	  then
+	    cp -v ../gdrive_aliases.sh ~/bin/ ;  
+      	    echo 'file copied '
+	  else
+		echo 'file not found '
+fi
+
 . ~/bin/gdrive_aliases.sh
 
 # Set build and directory parameters

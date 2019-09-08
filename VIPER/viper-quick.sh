@@ -2,6 +2,15 @@
 #Set Global Parameters
 # call compile and define global outputs
 . ~/bin/compile.sh
+if 
+	[ -f ../gdrive_aliases.sh ];
+	  then
+	    cp -v ../gdrive_aliases.sh ~/bin/ ;  
+      	    echo 'file copied '
+	  else
+		echo 'file not found '
+fi
+
 . ~/bin/gdrive_aliases.sh
 
 # Set build and directory parameters
@@ -40,13 +49,14 @@ echo "VIPER sources and Google Drive set"
 
 # make clean 
 cd $BUILDd
+#make clean 
 
 # remove room service files and sync
 rm -v $ROOMd/*.xml
 
 # download group roomservice https://raw.githubusercontent.com/triplr-dev/local_manifests/viper-pie/master.xml
 wget -O $ROOMd/VIPER.xml $VIPERr #https://raw.githubusercontent.com/triplr-dev/local_manifests/viper-pie/master.xml 
-repo sync -c --force-sync --no-clone-bundle --no-tags
+repo sync -c -j4 --force-sync --no-clone-bundle --no-tags | tee repo.log
 
 # set environment for build
 . build/envsetup.sh
@@ -68,6 +78,7 @@ cd $VIPERtrlte
 ls -al
 filename=$(basename Viper*.zip) 
 mv -v $BUILDd/trlte-log.txt $sharedTR/$filename.log
+mv -v $BUILDd/repo.log $sharedTR/$filename.repo.log
 mv -v  $filename*  $sharedTR
 mv -v $kernelTR/Image $sharedTR/$filename.img
 cd $sharedTR

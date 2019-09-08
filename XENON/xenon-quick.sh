@@ -5,6 +5,14 @@
 # call google drive folder variables
 # to upload builds to google drive triplr.dev shared account
 # do not publish file, internal use only
+if 
+	[ -f ../gdrive_aliases.sh ];
+	  then
+	    cp -v ../gdrive_aliases.sh ~/bin/ ;  
+      	    echo 'file copied '
+	  else
+		echo 'file not found '
+fi
 . ~/bin/gdrive_aliases.sh
 
 export out_dir=$OUT_DIR_COMMON_BASE
@@ -45,10 +53,11 @@ rm -v $ROOMd/*.xml
 
 # make clean 
 cd $BUILDd
+# make clean
 
 # install from web roomservice
 wget -O $ROOMd/XenonHD.xml $ROOMs
-repo sync -c --force-sync --no-clone-bundle --no-tags
+repo sync -c -j4 --force-sync --no-clone-bundle --no-tags | tee repo.log
 
 # set environment for build 
 . build/envsetup.sh
@@ -70,6 +79,7 @@ cd $XENONHDtrlte
 ls -al
 filename=$(basename X*.zip) 
 mv -v $BUILDd/trlte-log.txt $sharedTR/$filename.log
+mv -v $BUILDd/repo.log $sharedTR/$filename.repo.log
 mv -v  $filename*  $sharedTR
 mv -v $kernelTR/Image $sharedTR/$filename.img
 cd $sharedTR

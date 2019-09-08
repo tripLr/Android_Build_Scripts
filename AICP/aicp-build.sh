@@ -5,6 +5,15 @@
 # call google drive folder variables
 # to upload builds to google drive triplr.dev shared account
 # do not publish file, internal use only
+if 
+        [ -f ../gdrive_aliases.sh ];
+          then
+            cp -v ../gdrive_aliases.sh ~/bin/ ; 
+            echo 'file copied '
+          else
+                echo 'file not found '
+fi
+
 . ~/bin/gdrive_aliases.sh
 
 # Set build and directory parameters
@@ -39,17 +48,15 @@ export sharedTB='/home/shared/triplr/builds/AICP_tblte'
 export sharedTD='/home/shared/triplr/builds/AICP_trlteduos'
 
 cd $BUILDd
-make clean && make clobber
+make clean 
 
 # remove room service files
 rm -v $ROOMd/*.xml
 
 cd $BUILDd
-repo sync -c --force-sync --no-clone-bundle --no-tags
-
 # install from web roomservice
 wget -O $ROOMd/AICP.xml $ROOMs #https://raw.githubusercontent.com/triplr-dev/local_manifests/aokp-pie/master.xml
-repo sync -c --force-sync --no-clone-bundle --no-tags
+repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags | tee repo.log
 
 # set environment for build 
 . build/envsetup.sh
@@ -67,6 +74,8 @@ brunch trlteduos | tee trlteduos-log.txt
 cd $AICPtrlte
 ls -al
 filename=$(basename aicp*UNOFFICIAL*.zip) 
+mv -v $BUILDd/repo.log $sharedTR/$filename.repo.log
+mv -v $BUILDd/trlte-log.txt $sharedTR/$filename.log
 mv -v  $filename*  $sharedTR
 mv -v $kernelTR/Image $sharedTR/$filename.img
 cd $sharedTR
@@ -78,6 +87,7 @@ gdrive upload --parent $AICPtrlteG $filename.md5sum
 cd $AICPtblte
 ls -al
 filename=$(basename aicp*UNOFFICIAL*.zip) 
+mv -v $BUILDd/tblte-log.txt $sharedTB/$filename.log
 mv -v  $filename*  $sharedTB
 mv -v $kernelTB/Image $sharedTB/$filename.img
 cd $sharedTB
@@ -89,6 +99,7 @@ gdrive upload --parent $AICPtblteG $filename.md5sum
 cd $AICPtrlteduos
 ls -al
 filename=$(basename aicp*UNOFFICIAL*.zip) 
+mv -v $BUILDd/trlteduos-log.txt $sharedTB/$filename.log
 mv -v  $filename*  $sharedTD
 mv -v $kernelTD/Image $sharedTD/$filename.img
 cd $sharedTD

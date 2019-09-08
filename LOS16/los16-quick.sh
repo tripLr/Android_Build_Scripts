@@ -48,13 +48,13 @@ export sharedTB='/home/shared/triplr/builds/AEX_tblte'
 export sharedTD='/home/shared/triplr/builds/AEX_trlteduos'
 
 cd $BUILDd
-make clean
+#make clean
 
 # remove room service files
 rm -v $ROOMd/*.xml
 # install from web roomservice
 wget -O $ROOMd/AEX.xml $ROOMs
-repo sync -c -j4 --force-sync --no-clone-bundle --no-tags | tee repo.log
+repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
 
 
 # set environment for build 
@@ -77,7 +77,6 @@ cd $AEXtrlte
 ls -al
 filename=$(basename Aosp*.zip) 
 mv -v $BUILDd/trlte-log.txt $sharedTR/$filename.log
-mv -v $BUILDd/repo.log $sharedTR/$filename.repo.log
 mv -v  $filename*  $sharedTR
 mv -v $kernelTR/Image $sharedTR/$filename.img
 cd $sharedTR

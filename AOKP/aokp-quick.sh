@@ -5,6 +5,15 @@
 # call google drive folder variables
 # to upload builds to google drive triplr.dev shared account
 # do not publish file, internal use only
+if 
+	[ -f ../gdrive_aliases.sh ];
+	  then
+	    cp -v ../gdrive_aliases.sh ~/bin/ ;  
+      	    echo 'file copied '
+	  else
+		echo 'file not found '
+fi
+
 . ~/bin/gdrive_aliases.sh
 
 # Set build and directory parameters
@@ -19,7 +28,6 @@ if
 fi
 
 export out_dir=$OUT_DIR_COMMON_BASE
-
 
 #trlte out
 export AOKPtrlte=$out_dir/AOKP_pie/target/product/trlte
@@ -41,7 +49,9 @@ export sharedTD='/home/shared/triplr/builds/AOKP_trlteduos'
 # remove room service files
 rm -v $ROOMd/*.xml
 
+# make clean 
 cd $BUILDd
+#make clean
 
 # install from web roomservice
 wget -O $ROOMd/AOKP.xml https://raw.githubusercontent.com/triplr-dev/local_manifests/aokp-pie/master.xml
@@ -96,6 +106,6 @@ mv -v $kernelTD/Image $sharedTD/$filename.img
 cd $sharedTD
 ls -al
 gdrive upload --parent $AOKPtrlteduosG $filename 
-gdrive upload --parent $AOKPtrlteduosG $filename.img 
+gdrive upload --parent $AOKPtrlteduosG $filename.img
 gdrive upload --parent $AOKPtrlteduosG $filename.md5sum 
 cd $AOKPb

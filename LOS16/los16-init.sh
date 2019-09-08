@@ -19,7 +19,7 @@ if
    	then
 	mkdir -pv $INITd ;
 	repo init --depth=1 -u git://github.com/LineageOS/android.git -b lineage-16.0 ;
-	repo sync -c --force-sync --no-clone-bundle --no-tags	;
+	repo sync -c -j4 --force-sync --no-clone-bundle --no-tags	;
 	echo "REPO init and sync complete"		
          else
     echo ' repo dir exists ' 
