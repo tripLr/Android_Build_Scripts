@@ -1,4 +1,4 @@
-# Script to Build and Upload AEX TRLTE
+# Script to Build and Upload LOS16 TRLTE
 # Set Global Parameters
 # Server Specific compile settings
 . ~/bin/compile.sh
@@ -16,8 +16,8 @@ fi
 . ~/bin/gdrive_aliases.sh
 
 # Set build and directory parameters
-export BUILDd=~/android/AEX
-export ROOMd=~/android/AEX/.repo/local_manifests
+export BUILDd=~/android/LOS16
+export ROOMd=~/android/LOS16/.repo/local_manifests
 if 
    [ ! -d $ROOMd ];
 	 then
@@ -30,22 +30,22 @@ export out_dir=$OUT_DIR_COMMON_BASE
 export ROOMs=https://raw.githubusercontent.com/triplr-dev/local_manifests/aex-9.x/master.xml
 
 #trlte out
-export AEXtrlte=$out_dir/AEX/target/product/trlte
-#                        /AEX/target/product/trlte/obj/KERNEL_OBJ/arch/arm/boot
-export kernelTR=$out_dir/AEX/target/product/trlte/obj/KERNEL_OBJ/arch/arm/boot
+export LOS16trlte=$out_dir/LOS16/target/product/trlte
+#                        /LOS16/target/product/trlte/obj/KERNEL_OBJ/arch/arm/boot
+export kernelTR=$out_dir/LOS16/target/product/trlte/obj/KERNEL_OBJ/arch/arm/boot
 
 # tblte out
-export AEXtblte=$out_dir/AEX/target/product/tblte
-export kernelTB=$out_dir/AEX/target/product/tblte/obj/KERNEL_OBJ/arch/arm/boot
+export LOS16tblte=$out_dir/LOS16/target/product/tblte
+export kernelTB=$out_dir/LOS16/target/product/tblte/obj/KERNEL_OBJ/arch/arm/boot
 
 # trlteduos out
-export AEXtrlteduos=$out_dir/AEX/target/product/trlteduos
-export kernelTD=$out_dir/AEX/target/product/trlteduos/obj/KERNEL_OBJ/arch/arm/boot
+export LOS16trlteduos=$out_dir/LOS16/target/product/trlteduos
+export kernelTD=$out_dir/LOS16/target/product/trlteduos/obj/KERNEL_OBJ/arch/arm/boot
 
 # copy finished compiles to internal RAID storage on server
-export sharedTR='/home/shared/triplr/builds/AEX_trlte'
-export sharedTB='/home/shared/triplr/builds/AEX_tblte'
-export sharedTD='/home/shared/triplr/builds/AEX_trlteduos'
+export sharedTR='/home/shared/triplr/builds/LOS16_trlte'
+export sharedTB='/home/shared/triplr/builds/LOS16_tblte'
+export sharedTD='/home/shared/triplr/builds/LOS16_trlteduos'
 
 cd $BUILDd
 make clean
@@ -53,8 +53,8 @@ make clean
 # remove room service files
 rm -v $ROOMd/*.xml
 # install from web roomservice
-wget -O $ROOMd/AEX.xml $ROOMs
-repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
+wget -O $ROOMd/LOS16.xml $ROOMs
+repo sync -c -j4 force-sync --no-clone-bundle --no-tags | tee repo.log
 
 
 # set environment for build 
@@ -73,19 +73,20 @@ lunch aosp_trlteduos-userdebug
 mka aex -j$(nproc --all) | tee trlteduos-log.txt
 
 # Begin copy to shared and upload trlte
-cd $AEXtrlte
+cd $LOS16trlte
 ls -al
 filename=$(basename Aosp*.zip) 
 mv -v $BUILDd/trlte-log.txt $sharedTR/$filename.log
+mv -v $BUILDd/repo.log $sharedTR/$filename.repo.log
 mv -v  $filename*  $sharedTR
 mv -v $kernelTR/Image $sharedTR/$filename.img
 cd $sharedTR
 ls -al
-gdrive upload --parent $AEXtrlteG $filename 
-gdrive upload --parent $AEXtrlteG $filename.img 
-gdrive upload --parent $AEXtrlteG $filename.md5sum 
+gdrive upload --parent $LOS16trlteG $filename 
+gdrive upload --parent $LOS16trlteG $filename.img 
+gdrive upload --parent $LOS16trlteG $filename.md5sum 
 # Begin copy to shared and upload tblte
-cd $AEXtblte
+cd $LOS16tblte
 ls -al
 filename=$(basename Aosp*.zip)
 mv -v $BUILDd/tblte-log.txt $sharedTB/$filename.log
@@ -93,11 +94,11 @@ mv -v  $filename*  $sharedTB
 mv -v $kernelTB/Image $sharedTB/$filename.img
 cd $sharedTB
 ls -al
-gdrive upload --parent $AEXtblteG $filename 
-gdrive upload --parent $AEXtblteG $filename.img 
-gdrive upload --parent $AEXtblteG $filename.md5sum 
+gdrive upload --parent $LOS16tblteG $filename 
+gdrive upload --parent $LOS16tblteG $filename.img 
+gdrive upload --parent $LOS16tblteG $filename.md5sum 
 # Begin copy to shared and upload trlteduos
-cd $AEXtrlteduos
+cd $LOS16trlteduos
 ls -al
 filename=$(basename Aosp*.zip)
 mv -v $BUILDd/trlteduos-log.txt $sharedTD/$filename.log
@@ -105,7 +106,7 @@ mv -v  $filename*  $sharedTD
 mv -v $kernelTD/Image $sharedTD/$filename.img
 cd $sharedTD
 ls -al
-gdrive upload --parent $AEXtrlteduosG $filename 
-gdrive upload --parent $AEXtrlteduosG $filename.img 
-gdrive upload --parent $AEXtrlteduosG $filename.md5sum 
+gdrive upload --parent $LOS16trlteduosG $filename 
+gdrive upload --parent $LOS16trlteduosG $filename.img 
+gdrive upload --parent $LOS16trlteduosG $filename.md5sum 
 cd $BUILDd

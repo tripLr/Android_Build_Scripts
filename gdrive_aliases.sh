@@ -108,10 +108,10 @@ export PixelPlustrlteduosG=1MbFnbb_DPd5WUWsjqjAnDkTEYUZbYGr8
 # tblte 	https://drive.google.com/open?id=1H_jFqHe7AHbF1FOj9_yAcqyGaNnO5m9X
 # trlteduos 	https://drive.google.com/open?id=1Aps0D2H5L2q4zpg2ESYqcPPdgKH3r2Do
 #export LOS16r=https://raw.githubusercontent.com/triplr-dev/local_manifests/lineage-16.0/master.xml
-#export LOS16trlteG=1YX-AodWUl5xTCPE8lfMvR0zsjQLe1EFR
-#export LOS16tblteG=1H_jFqHe7AHbF1FOj9_yAcqyGaNnO5m9X
-#export LOS16trlteduosG=1Aps0D2H5L2q4zpg2ESYqcPPdgKH3r2Do
-#echo LOS16 sources and Google Drive set
+export LOS16trlteG=1YX-AodWUl5xTCPE8lfMvR0zsjQLe1EFR
+export LOS16tblteG=1H_jFqHe7AHbF1FOj9_yAcqyGaNnO5m9X
+export LOS16trlteduosG=1Aps0D2H5L2q4zpg2ESYqcPPdgKH3r2Do
+echo LOS16 sources and Google Drive set
 
 # SYBERIA
 # trlte		https://drive.google.com/open?id=1r5GfaHLDlFXuv8ahIKCXQnYmVxH52j6w
