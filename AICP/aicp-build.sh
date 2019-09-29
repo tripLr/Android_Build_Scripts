@@ -17,8 +17,8 @@ fi
 . ~/bin/gdrive_aliases.sh
 
 # Set build and directory parameters
-export BUILDd=~/android/AICP
-export ROOMd=~/android/AICP/.repo/local_manifests
+export BUILDd=~/android/9/AICP
+export ROOMd=~/android/9/AICP/.repo/local_manifests
 if 
    [ ! -d $ROOMd ];
 	 then
