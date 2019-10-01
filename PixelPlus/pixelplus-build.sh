@@ -17,8 +17,8 @@ fi
 
 
 # Set build and directory parameters
-export BUILDd=~/android/PixelPlus
-export ROOMd=~/android/PixelPlus/.repo/local_manifests
+export BUILDd=~/android/9/PixelPlus
+export ROOMd=~/android/9/PixelPlus/.repo/local_manifests
 if 
    [ ! -d $ROOMd ];
 	 then
