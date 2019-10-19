@@ -18,8 +18,8 @@ fi
 export out_dir=$OUT_DIR_COMMON_BASE
 
 # Set build and directory parameters
-export BUILDd=~/android/XENONHD
-export ROOMd=~/android/XENONHD/.repo/local_manifests
+export BUILDd=~/android/9/XENONHD
+export ROOMd=~/android/9/XENONHD/.repo/local_manifests
 if 
    [ ! -d $ROOMd ];
          then
