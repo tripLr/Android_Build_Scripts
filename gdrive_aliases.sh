@@ -76,7 +76,7 @@ echo Pixel Experience and Google Drive set
 # TBLTE https://drive.google.com/open?id=1C8JEt_9DDeZTnHKJFIaSljnN2N1bwha_
 # TRLTEduos https://drive.google.com/open?id=1MbFnbb_DPd5WUWsjqjAnDkTEYUZbYGr8
 export PixelPlustrlteG=19P5DqZwWSHlCt9CoisECzRU9gOww7uF5
-export PixelPlustblteG=C8JEt_9DDeZTnHKJFIaSljnN2N1bwha_
+export PixelPlustblteG=1C8JEt_9DDeZTnHKJFIaSljnN2N1bwha_
 export PixelPlustrlteduosG=1MbFnbb_DPd5WUWsjqjAnDkTEYUZbYGr8
 
 # LineageOS 14
