@@ -14,8 +14,8 @@ fi
 . ~/bin/gdrive_aliases.sh
 
 # Set build and directory parameters
-export BUILDd=~/android/VIPER
-export ROOMd=~/android/VIPER/.repo/local_manifests
+export BUILDd=~/android/9/VIPER
+export ROOMd=~/android/9/VIPER/.repo/local_manifests
 # check if local manifest dir exists if not then create
 if 
    [ ! -d $ROOMd ];
