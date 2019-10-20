@@ -5,15 +5,16 @@
 # call google drive folder variables
 # to upload builds to google drive triplr.dev shared account
 if 
-	[ -f ../gdrive_aliases.sh ];
+	[ -f ../../gdrive_aliases.sh ];
 	  then
-	    cp -v ../gdrive_aliases.sh ~/bin/ ;  
+	    cp -v ../../gdrive_aliases.sh ~/bin/ ;  
       	    echo 'file copied '
 	  else
 		echo 'file not found '
 fi
 
 . ~/bin/gdrive_aliases.sh
+. ../../repo-update.sh
 
 # Set build and directory parameters
 export BUILDd=~/android/9/AEX
@@ -27,50 +28,40 @@ if
 fi
 
 export out_dir=$OUT_DIR_COMMON_BASE
-export ROOMs=https://raw.githubusercontent.com/triplr-dev/local_manifests/aex-9.x/master.xml
+export ROOMs=https://raw.githubusercontent.com/Exynos5433/local_manifests/aex-pie/gts28wifi.xml
 
-#trlte out
-export AEXtrlte=$out_dir/AEX/target/product/trlte
-#                        /AEX/target/product/trlte/obj/KERNEL_OBJ/arch/arm/boot
-export kernelTR=$out_dir/AEX/target/product/trlte/obj/KERNEL_OBJ/arch/arm/boot
-
-# tblte out
-export AEXtblte=$out_dir/AEX/target/product/tblte
-export kernelTB=$out_dir/AEX/target/product/tblte/obj/KERNEL_OBJ/arch/arm/boot
-
-# trlteduos out
-export AEXtrlteduos=$out_dir/AEX/target/product/trlteduos
-export kernelTD=$out_dir/AEX/target/product/trlteduos/obj/KERNEL_OBJ/arch/arm/boot
-
+# 710,715,810,815 out
 # copy finished compiles to internal RAID storage on server
-export sharedTR='/home/shared/triplr/builds/AEX_trlte'
-export sharedTB='/home/shared/triplr/builds/AEX_tblte'
-export sharedTD='/home/shared/triplr/builds/AEX_trlteduos'
+
+export shared710='/home/shared/triplr/builds/AEX710'
+export shared715='/home/shared/triplr/builds/AEX715'
+export shared810='/home/shared/triplr/builds/AEX810'
+export shared815='/home/shared/triplr/builds/AEX815'
 
 cd $BUILDd
-#make clean
+make clean
 
 # remove room service files
 rm -v $ROOMd/*.xml
 # install from web roomservice
 wget -O $ROOMd/AEX.xml $ROOMs
-repo sync -c -j4 --force-sync --no-clone-bundle --no-tags | tee repo.log
+repo sync -c -j32 --force-sync --no-clone-bundle --no-tags | tee repo.log
 
 
 # set environment for build 
 . build/envsetup.sh
 
-# build trlte
-lunch aosp_trlte-userdebug
+# build 710
+lunch aosp_gts28wifi-eng
 mka aex -j$(nproc --all) | tee trlte-log.txt
 
-# build tblte
-lunch aosp_tblte-userdebug
-mka aex -j$(nproc --all) | tee tblte-log.txt
+# build 715
+#lunch aosp_tblte-userdebug
+#mka aex -j$(nproc --all) | tee tblte-log.txt
 
 # build trlteduos
-lunch aosp_trlteduos-userdebug
-mka aex -j$(nproc --all) | tee trlteduos-log.txt
+#lunch aosp_trlteduos-userdebug
+#mka aex -j$(nproc --all) | tee trlteduos-log.txt
 
 # Begin copy to shared and upload trlte
 cd $AEXtrlte
