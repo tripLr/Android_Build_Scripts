@@ -65,14 +65,13 @@ echo XENONHD sources and Google Drive set
 
 
 # Exynos Chipsets
-# aex 710 https://drive.google.com/open?id=1OMlKGGr98zCMmxCP_sE1oG8u-vRo-iX0
+# aex710 https://drive.google.com/open?id=1FCt7voGQZrN4uMKlbd98NVUlMTs1LVlf
 # aex715 https://drive.google.com/open?id=1-eZc6usw6V-tuSI93wjqlWjiqrIugc4T
 # aex810 https://drive.google.com/open?id=1RhIeiRmswjVRB4YZ7YSLOzitY5TLtuRm
 # aex815 https://drive.google.com/open?id=1nwzfMYYJL5U8YwUCLOYgliVe5ola4FWo
-export aex710=1OMlKGGr98zCMmxCP_sE1oG8u-vRo-iX0
-export aex715=1-eZc6usw6V-tuSI93wjqlWjiqrIugc4T
-export aex810=1RhIeiRmswjVRB4YZ7YSLOzitY5TLtuRm
-export aex815=1nwzfMYYJL5U8YwUCLOYgliVe5ola4FWo
+export AEX710G=1FCt7voGQZrN4uMKlbd98NVUlMTs1LVlf
+export AEX715G=1-eZc6usw6V-tuSI93wjqlWjiqrIugc4T
+export AEX810G=1RhIeiRmswjVRB4YZ7YSLOzitY5TLtuRm
+export AEX815G=1nwzfMYYJL5U8YwUCLOYgliVe5ola4FWo
 
-
-
+echo Exynos Chipsets set

@@ -1,4 +1,4 @@
-# Script to Build and Upload AEX TRLTE
+# Script to Build and Upload PixelPlus Exynos 5433 
 # Set Global Parameters
 # Server Specific compile settings
 . ~/bin/compile.sh
@@ -17,8 +17,8 @@ fi
 . ../../repo-update.sh
 
 # Set build and directory parameters
-export BUILDd=~/android/9/AEX
-export ROOMd=~/android/9/AEX/.repo/local_manifests
+export BUILDd=~/android/9/PixelPlus
+export ROOMd=~/android/9/PixelPlus/.repo/local_manifests
 if 
    [ ! -d $ROOMd ];
 	 then
@@ -35,20 +35,20 @@ export ROOMs=https://raw.githubusercontent.com/tripLr/local_manifests/aex-9.x/Ex
 # 710,715,810,815 out
 # copy finished compiles to internal RAID storage on server
 
-export shared710='/home/shared/triplr/builds/AEX710'
-export shared715='/home/shared/triplr/builds/AEX715'
-export shared810='/home/shared/triplr/builds/AEX810'
-export shared815='/home/shared/triplr/builds/AEX815'
+export shared710='/home/shared/triplr/builds/PixelPlus710'
+export shared715='/home/shared/triplr/builds/PixelPlus715'
+export shared810='/home/shared/triplr/builds/PixelPlus810'
+export shared815='/home/shared/triplr/builds/PixelPlus815'
 
-export t710=$out_dir/AEX/target/product/gts28wifi
-export t715=$out_dir/AEX/target/product/gts28ltexx
-export t810=$out_dir/AEX/target/product/gts210wifi
-export t815=$out_dir/AEX/target/product/gts210ltexx
+export t710=$out_dir/PixelPlus/target/product/gts28wifi
+export t715=$out_dir/PixelPlus/target/product/gts28ltexx
+export t810=$out_dir/PixelPlus/target/product/gts210wifi
+export t815=$out_dir/PixelPlus/target/product/gts210ltexx
 
-export t710k=$out_dir/AEX/target/product/gts28wifi/obj/KERNEL_OBJ/arch/arm/boot
-export t715k=$out_dir/AEX/target/product/gts28ltexx/obj/KERNEL_OBJ/arch/arm/boot
-export t810k=$out_dir/AEX/target/product/gts210wifi/obj/KERNEL_OBJ/arch/arm/boot
-export t815k=$out_dir/AEX/target/product/gts210ltexx/obj/KERNEL_OBJ/arch/arm/boot
+export t710k=$out_dir/PixelPlus/target/product/gts28wifi/obj/KERNEL_OBJ/arch/arm/boot
+export t715k=$out_dir/PixelPlus/target/product/gts28ltexx/obj/KERNEL_OBJ/arch/arm/boot
+export t810k=$out_dir/PixelPlus/target/product/gts210wifi/obj/KERNEL_OBJ/arch/arm/boot
+export t815k=$out_dir/PixelPlus/target/product/gts210ltexx/obj/KERNEL_OBJ/arch/arm/boot
 
 cd $BUILDd
 make clean
@@ -56,7 +56,7 @@ make clean
 # remove room service files
 rm -v $ROOMd/*.xml
 # install from web roomservice
-wget -O $ROOMd/AEX.xml $ROOMs
+wget -O $ROOMd/PixelPlus.xml $ROOMs
 repo sync -c -j32 --force-sync --no-clone-bundle --no-tags | tee repo.log
 
 
@@ -65,19 +65,19 @@ repo sync -c -j32 --force-sync --no-clone-bundle --no-tags | tee repo.log
 
 # build 710
 lunch aosp_gts28wifi-userdebug
-mka aex -j$(nproc --all) | tee t710-log.txt
+mka bacon -j$(nproc --all) | tee t710-log.txt
 
 # build 715
 lunch aosp_gts28ltexx-userdebug
-mka aex -j$(nproc --all) | tee t715-log.txt
+mka bacon -j$(nproc --all) | tee t715-log.txt
 
 # build 810
 lunch aosp_gts210wifi-userdebug
-mka aex -j$(nproc --all) | tee t810-log.txt
+mka bacon -j$(nproc --all) | tee t810-log.txt
 
 # build 815
 lunch aosp_gts210ltexx-userdebug
-mka aex -j$(nproc --all) | tee t815-log.txt
+mka bacon -j$(nproc --all) | tee t815-log.txt
 
 # Begin copy to shared and upload trlte
 cd $t710
@@ -89,7 +89,7 @@ mv -v  $710k/Image $shared710
 mv -v  $filename*  $shared710
 cd $shared710
 ls -al
-gdrive upload --parent $AEX710G $filename 
+gdrive upload --parent $PixelPlus710G $filename 
 
 cd $t715
 ls -al
@@ -100,7 +100,7 @@ mv -v  $715k/Image $shared715
 mv -v  $filename*  $shared715
 cd $shared715
 ls -al
-gdrive upload --parent $AEX715G $filename 
+gdrive upload --parent $PixelPlus715G $filename 
 
 cd $t810
 ls -al
@@ -111,7 +111,7 @@ mv -v  $810k/Image $shared810
 mv -v  $filename*  $shared810
 cd $shared810
 ls -al
-gdrive upload --parent $AEX810G $filename 
+gdrive upload --parent $PixelPlus810G $filename 
 
 cd $t815
 ls -al
@@ -122,8 +122,6 @@ mv -v  $815k/Image $shared815
 mv -v  $filename*  $shared815
 cd $shared815
 ls -al
-gdrive upload --parent $AEX815G $filename 
+gdrive upload --parent $PixelPlus815G $filename && cd $BUILDd && make clean
 
-
-ls -al
-cd $BUILDd
+echo "Happy Flashing !!"
