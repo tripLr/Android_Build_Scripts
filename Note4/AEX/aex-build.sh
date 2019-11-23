@@ -82,9 +82,9 @@ mv -v  $filename*  $sharedTR
 mv -v $kernelTR/Image $sharedTR/$filename.img
 cd $sharedTR
 ls -al
-gdrive upload --parent $AEXtrlteG $filename 
-gdrive upload --parent $AEXtrlteG $filename.img 
-gdrive upload --parent $AEXtrlteG $filename.md5sum 
+gdrive upload --parent $AEXtrlteG $filename && 
+gdrive upload --parent $AEXtrlteG $filename.img && 
+gdrive upload --parent $AEXtrlteG $filename.md5sum  
 # Begin copy to shared and upload tblte
 cd $AEXtblte
 ls -al
@@ -94,8 +94,8 @@ mv -v  $filename*  $sharedTB
 mv -v $kernelTB/Image $sharedTB/$filename.img
 cd $sharedTB
 ls -al
-gdrive upload --parent $AEXtblteG $filename 
-gdrive upload --parent $AEXtblteG $filename.img 
+gdrive upload --parent $AEXtblteG $filename &&
+gdrive upload --parent $AEXtblteG $filename.img &&
 gdrive upload --parent $AEXtblteG $filename.md5sum 
 # Begin copy to shared and upload trlteduos
 cd $AEXtrlteduos

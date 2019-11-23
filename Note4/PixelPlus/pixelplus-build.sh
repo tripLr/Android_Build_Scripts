@@ -74,38 +74,38 @@ mka bacon -j$(nproc --all) | tee trlteduos-log.txt
 # Begin copy to shared and upload trlte
 cd $PixelPlustrlte
 ls -al
-filename=$(basename PixelExperience*.zip) 
-mv -v $BUILDd/trlte-log.txt $sharedTR/$filename.log
-mv -v $BUILDd/repo.log $sharedTR/$filename.repo.log
-mv -v  $filename*  $sharedTR
-mv -v $kernelTR/Image $sharedTR/$filename.img
-cd $sharedTR
-ls -al
-gdrive upload --parent $PixelPlustrlteG $filename 
-gdrive upload --parent $PixelPlustrlteG $filename.img 
-gdrive upload --parent $PixelPlustrlteG $filename.md5sum 
+filename=$(basename PixelExperience*.zip) && 
+mv -v $BUILDd/trlte-log.txt $sharedTR/$filename.log &&
+mv -v $BUILDd/repo.log $sharedTR/$filename.repo.log &&
+mv -v  $filename*  $sharedTR &&
+mv -v $kernelTR/Image $sharedTR/$filename.img &&
+cd $sharedTR 
+ls -al 
+gdrive upload --parent $PixelPlustrlteG $filename &&
+gdrive upload --parent $PixelPlustrlteG $filename.img &&
+gdrive upload --parent $PixelPlustrlteG $filename.md5sum &&
 # Begin copy to shared and upload tblte
 cd $PixelPlustblte
 ls -al
-filename=$(basename PixelExperience*.zip) 
-mv -v $BUILDd/tblte-log.txt $sharedTB/$filename.log
-mv -v  $filename*  $sharedTB
-mv -v $kernelTB/Image $sharedTB/$filename.img
+filename=$(basename PixelExperience*.zip) &&
+mv -v $BUILDd/tblte-log.txt $sharedTB/$filename.log &&
+mv -v  $filename*  $sharedTB &&
+mv -v $kernelTB/Image $sharedTB/$filename.img &&
 cd $sharedTB
 ls -al
-gdrive upload --parent $PixelPlustblteG $filename 
-gdrive upload --parent $PixelPlustblteG $filename.img 
-gdrive upload --parent $PixelPlustblteG $filename.md5sum 
+gdrive upload --parent $PixelPlustblteG $filename && 
+gdrive upload --parent $PixelPlustblteG $filename.img && 
+gdrive upload --parent $PixelPlustblteG $filename.md5sum &&
 # Begin copy to shared and upload trlteduos
 cd $PixelPlustrlteduos
 ls -al
-filename=$(basename PixelExperience*.zip) 
-mv -v $BUILDd/trlteduos-log.txt $sharedTD/$filename.log
-mv -v  $filename*  $sharedTD
-mv -v $kernelTD/Image $sharedTD/$filename.img
+filename=$(basename PixelExperience*.zip) **
+mv -v $BUILDd/trlteduos-log.txt $sharedTD/$filename.log &&
+mv -v  $filename*  $sharedTD &&
+mv -v $kernelTD/Image $sharedTD/$filename.img &&
 cd $sharedTD
 ls -al
-gdrive upload --parent $PixelPlustrlteduosG $filename 
-gdrive upload --parent $PixelPlustrlteduosG $filename.img 
-gdrive upload --parent $PixelPlustrlteduosG $filename.md5sum 
+gdrive upload --parent $PixelPlustrlteduosG $filename && 
+gdrive upload --parent $PixelPlustrlteduosG $filename.img && 
+gdrive upload --parent $PixelPlustrlteduosG $filename.md5sum &&
 cd $PixelPlusb
