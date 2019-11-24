@@ -6,15 +6,16 @@
 # to upload builds to google drive triplr.dev shared account
 # do not publish file, internal use only
 if 
-        [ -f ../gdrive_aliases.sh ];
+        [ -f ../../gdrive_aliases.sh ];
           then
-            cp -v ../gdrive_aliases.sh ~/bin/ ; 
+            cp -v ../../gdrive_aliases.sh ~/bin/ ; 
             echo 'file copied '
           else
                 echo 'file not found '
 fi
 
 . ~/bin/gdrive_aliases.sh
+. ../../repo-update.sh
 
 # Set build and directory parameters
 export BUILDd=~/android/9/AICP

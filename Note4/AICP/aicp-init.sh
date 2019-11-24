@@ -16,6 +16,7 @@ if
    [ ! -d $INITd ];
    	then
 	mkdir -pv $INITd;
+	cd $INITd
 	repo init --depth=1 -u https://github.com/AICP/platform_manifest.git -b p9.0	;
 	repo sync -c --force-sync --no-clone-bundle --no-tags	;
 	echo "REPO init and sync complete"		

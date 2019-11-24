@@ -6,14 +6,15 @@
 # to upload builds to google drive triplr.dev shared account
 # do not publish file, internal use only
 if 
-	[ -f ../gdrive_aliases.sh ];
+	[ -f ../../gdrive_aliases.sh ];
 	  then
-	    cp -v ../gdrive_aliases.sh ~/bin/ ;  
+	    cp -v ../../gdrive_aliases.sh ~/bin/ ;  
       	    echo 'file copied '
 	  else
 		echo 'file not found '
 fi
 . ~/bin/gdrive_aliases.sh
+. ../../repo-update.sh
 
 export out_dir=$OUT_DIR_COMMON_BASE
 
@@ -51,12 +52,13 @@ export ROOMs=https://raw.githubusercontent.com/triplr-dev/local_manifests/xenonh
 # remove room service files
 rm -v $ROOMd/*.xml
 
+wget -O $ROOMd/XenonHD.xml $ROOMs
+
 # make clean 
 cd $BUILDd
 make clean
 
 # install from web roomservice
-wget -O $ROOMd/XenonHD.xml $ROOMs
 repo sync -c -j4 --force-sync --no-clone-bundle --no-tags | tee repo.log
 
 # set environment for build 

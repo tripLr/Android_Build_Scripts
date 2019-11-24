@@ -7,7 +7,7 @@
 # ViperOS		repo init --depth=1 -u https://github.com/ViperOS/viper_manifest.git -b pie
 # xenon 		repo init --depth=1 -u https://github.com/TeamHorizon/platform_manifest.git -b p
 
-export BUILDd=~/android/AOKP
+export BUILDd=~/android/9/AOKP
 export INITd=$BUILDd/.repo
 export ROOMd=$BUILDd/.repo/local_manifests
 #
@@ -16,6 +16,7 @@ if
    [ ! -d $INITd ];
    	then
 	mkdir -pv $INITd;
+	cd $INITd
 	repo init --depth=1 -u https://github.com/AOKP/platform_manifest.git -b pie	;
 	repo sync -c --force-sync --no-clone-bundle --no-tags	;
 	echo "REPO init and sync complete"		

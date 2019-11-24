@@ -3,15 +3,16 @@
 # call compile and define global outputs
 . ~/bin/compile.sh
 if 
-	[ -f ../gdrive_aliases.sh ];
+	[ -f ../../gdrive_aliases.sh ];
 	  then
-	    cp -v ../gdrive_aliases.sh ~/bin/ ;  
+	    cp -v ../../gdrive_aliases.sh ~/bin/ ;  
       	    echo 'file copied '
 	  else
 		echo 'file not found '
 fi
 
 . ~/bin/gdrive_aliases.sh
+. ../../repo-update.sh
 
 # Set build and directory parameters
 export BUILDd=~/android/9/VIPER
@@ -54,8 +55,8 @@ make clean
 # remove room service files and sync
 rm -v $ROOMd/*.xml
 
-# download group roomservice https://raw.githubusercontent.com/triplr-dev/local_manifests/viper-pie/master.xml
 wget -O $ROOMd/VIPER.xml $VIPERr #https://raw.githubusercontent.com/triplr-dev/local_manifests/viper-pie/master.xml 
+# download group roomservice https://raw.githubusercontent.com/triplr-dev/local_manifests/viper-pie/master.xml
 repo sync -c -j4 --force-sync --no-clone-bundle --no-tags | tee repo.log
 
 # set environment for build
