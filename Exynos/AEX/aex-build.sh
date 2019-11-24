@@ -30,8 +30,7 @@ fi
 export out_dir=$OUT_DIR_COMMON_BASE
 #export ROOMs=https://raw.githubusercontent.com/Exynos5433/local_manifests/aex-pie/gts28wifi.xml
 
-export ROOMs=https://raw.githubusercontent.com/tripLr/local_manifests/aex-9.x/Exynos/master_gts2.xml
-
+export ROOMs=https://raw.githubusercontent.com/tripLr/local_manifests-1/aex-9.x/master_gts2.xml
 # 710,715,810,815 out
 # copy finished compiles to internal RAID storage on server
 
@@ -51,7 +50,7 @@ export t810k=$out_dir/AEX/target/product/gts210wifi/obj/KERNEL_OBJ/arch/arm/boot
 export t815k=$out_dir/AEX/target/product/gts210ltexx/obj/KERNEL_OBJ/arch/arm/boot
 
 cd $BUILDd
-make clean
+# make clean
 
 # remove room service files
 rm -v $ROOMd/*.xml
@@ -127,3 +126,5 @@ gdrive upload --parent $AEX815G $filename
 
 ls -al
 cd $BUILDd
+make clean
+echo 'enjoy aex for Exynos tab s2'
