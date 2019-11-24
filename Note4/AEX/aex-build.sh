@@ -48,13 +48,13 @@ export sharedTB='/home/shared/triplr/builds/AEX_tblte'
 export sharedTD='/home/shared/triplr/builds/AEX_trlteduos'
 
 cd $BUILDd
-make clean
+# make clean &
 
 # remove room service files
 rm -v $ROOMd/*.xml
 # install from web roomservice
 wget -O $ROOMd/AEX.xml $ROOMs
-repo sync -c -j4 --force-sync --no-clone-bundle --no-tags | tee repo.log
+~/bin/repo sync -c -j4 --force-sync --no-clone-bundle --no-tags | tee repo.log
 
 
 # set environment for build 
@@ -110,3 +110,4 @@ gdrive upload --parent $AEXtrlteduosG $filename
 gdrive upload --parent $AEXtrlteduosG $filename.img 
 gdrive upload --parent $AEXtrlteduosG $filename.md5sum 
 cd $BUILDd
+make clean &
