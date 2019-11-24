@@ -30,7 +30,7 @@ fi
 export out_dir=$OUT_DIR_COMMON_BASE
 #export ROOMs=https://raw.githubusercontent.com/Exynos5433/local_manifests/aex-pie/gts28wifi.xml
 
-export ROOMs=https://raw.githubusercontent.com/tripLr/local_manifests/aex-9.x/Exynos/gts2.xml
+export ROOMs=https://raw.githubusercontent.com/tripLr/local_manifests/aex-9.x/Exynos/master_gts2.xml
 
 # 710,715,810,815 out
 # copy finished compiles to internal RAID storage on server
