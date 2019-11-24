@@ -15,7 +15,7 @@ if
 fi
 
 . ~/bin/gdrive_aliases.sh
-. ../../repo-update.sh
+. ~/bin/repo-update.sh
 
 # Set build and directory parameters
 export BUILDd=~/android/9/AICP
@@ -49,7 +49,7 @@ export sharedTB='/home/shared/triplr/builds/AICP_tblte'
 export sharedTD='/home/shared/triplr/builds/AICP_trlteduos'
 
 cd $BUILDd
-make clean 
+#make clean 
 
 # remove room service files
 rm -v $ROOMd/*.xml
@@ -57,7 +57,7 @@ rm -v $ROOMd/*.xml
 cd $BUILDd
 # install from web roomservice
 wget -O $ROOMd/AICP.xml $ROOMs #https://raw.githubusercontent.com/triplr-dev/local_manifests/aokp-pie/master.xml
-repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags | tee repo.log
+. ~/bin/repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags | tee repo.log &&
 
 # set environment for build 
 . build/envsetup.sh
@@ -108,4 +108,6 @@ ls -al
 gdrive upload --parent $AICPtrlteduosG $filename 
 gdrive upload --parent $AICPtrlteduosG $filename.img
 gdrive upload --parent $AICPtrlteduosG $filename.md5sum 
-cd $AICPb
+cd $AICPb 
+make clean
+echo 'enjoy aicp'
