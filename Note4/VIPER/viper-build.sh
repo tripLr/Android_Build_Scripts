@@ -48,15 +48,13 @@ export sharedTD='/home/shared/triplr/builds/VIPER_trlteduos'
 export VIPERr=https://raw.githubusercontent.com/triplr-dev/local_manifests/viper-pie/master.xml
 echo "VIPER sources and Google Drive set"
 
-# make clean 
 cd $BUILDd
-make clean 
 
 # remove room service files and sync
 rm -v $ROOMd/*.xml
 
-wget -O $ROOMd/VIPER.xml $VIPERr #https://raw.githubusercontent.com/triplr-dev/local_manifests/viper-pie/master.xml 
-# download group roomservice https://raw.githubusercontent.com/triplr-dev/local_manifests/viper-pie/master.xml
+wget -O $ROOMd/VIPER.xml $VIPERr 
+#download group roomservice https://raw.githubusercontent.com/triplr-dev/local_manifests/viper-pie/master.xml
 repo sync -c -j4 --force-sync --no-clone-bundle --no-tags | tee repo.log
 
 # set environment for build
@@ -112,3 +110,4 @@ gdrive upload --parent $VIPERtrlteduosG $filename
 gdrive upload --parent $VIPERtrlteduosG $filename.img 
 gdrive upload --parent $VIPERtrlteduosG $filename.md5sum
 cd $BUILDd
+make clean
