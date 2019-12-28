@@ -22,6 +22,7 @@ if
    [ ! -d $ROOMd ];
 	 then
     mkdir -pv $ROOMd ;
+    exit ;
          else
     echo ' roomservice dir exists ' 
 fi

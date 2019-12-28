@@ -23,7 +23,7 @@ export ROOMd=~/android/9/PixelPlus/.repo/local_manifests
 if 
    [ ! -d $ROOMd ];
 	 then
-    mkdir -pv $ROOMd ;
+    source *init.sh ;
          else
     echo ' roomservice dir exists ' 
 fi
@@ -49,7 +49,7 @@ export sharedTD='/home/shared/triplr/builds/PixelPlus_trlteduos'
 
 # make clean 
 cd $BUILDd
-make clean
+#make clean
 # remove room service files
 rm -v $ROOMd/*.xml
 
@@ -100,7 +100,7 @@ gdrive upload --parent $PixelPlustblteG $filename.md5sum &&
 # Begin copy to shared and upload trlteduos
 cd $PixelPlustrlteduos
 ls -al
-filename=$(basename PixelExperience*.zip) **
+filename=$(basename PixelExperience*.zip) &&
 mv -v $BUILDd/trlteduos-log.txt $sharedTD/$filename.log &&
 mv -v  $filename*  $sharedTD &&
 mv -v $kernelTD/Image $sharedTD/$filename.img &&

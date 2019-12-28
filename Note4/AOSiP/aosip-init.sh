@@ -11,7 +11,7 @@
 export BUILDd=~/android/9/AOSiP
 export INITd=$BUILDd/.repo
 export ROOMd=$BUILDd/.repo/local_manifests
-export manifest='repo init -u git://github.com/AOSiP/platform_manifest.git -b pie'
+export manifest='git://github.com/AOSiP/platform_manifest.git -b pie'
 #
 
 # check to see if $BUILDd exists, if not then create

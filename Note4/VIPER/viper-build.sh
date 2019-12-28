@@ -21,7 +21,7 @@ export ROOMd=~/android/9/VIPER/.repo/local_manifests
 if 
    [ ! -d $ROOMd ];
 	 then
-    mkdir -pv $ROOMd ;
+    source *init.sh;
          else
     echo ' roomservice dir exists ' 
 fi
