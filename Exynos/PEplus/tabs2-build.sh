@@ -51,68 +51,68 @@ repo sync -c -j32 --force-sync --no-clone-bundle --no-tags | tee repo.log
 # set environment for build 
 . build/envsetup.sh
 
-# note : && if step completed, goto next step else exit code exit
+# note :  if step completed, goto next step else exit code exit
 #        & run this step in background to upload file
 
 # build 710
-lunch aosp_gts28wifi-userdebug &&
-mka bacon -j$(nproc --all) | tee t710-log.txt &&
+lunch aosp_gts28wifi-userdebug 
+mka bacon -j$(nproc --all) | tee t710-log.txt 
 
 # Begin copy to shared and upload trlte
-cd $t710  &&
-ls -al &&
-filename=$(basename PixelExperience*.zip)  &&
-mv -v $BUILDd/t710-log.txt $shared710/$filename.log &&
-mv -v $BUILDd/repo.log $shared710/$filename.repo.log &&
-mv -v  $filename*  $shared710 &&
-cd $shared710 &&
-ls -al &&
-gdrive upload --parent $PixelPlus710G $filename &
+cd $t710  
+ls -al 
+filename710=$(basename PixelExperience*.zip)  
+mv -v $BUILDd/t710-log.txt $shared710/$filename710.log 
+mv -v $BUILDd/repo.log $shared710/$filename710.repo.log 
+mv -v  $filename710*  $shared710 
+cd $shared710 
+ls -al 
+gdrive upload --parent $PixelPlus710G $filename710 &
 
 cd $BUILDd 
 
 # build 715
-lunch aosp_gts28ltexx-userdebug &&
-mka bacon -j$(nproc --all) | tee t715-log.txt &&
-cd $t715 &&
-ls -al &&
-filename=$(basename PixelExperience*.zip) &&
-mv -v $BUILDd/t715-log.txt $shared715/$filename.log &&
-mv -v $BUILDd/repo.log $shared715/$filename.repo.log &&
-mv -v  $filename*  $shared715 &&
-cd $shared715 &&
-ls -al &&
-gdrive upload --parent $PixelPlus715G $filename  &
+lunch aosp_gts28ltexx-userdebug 
+mka bacon -j$(nproc --all) | tee t715-log.txt 
+cd $t715 
+ls -al 
+filename715=$(basename PixelExperience*.zip) 
+mv -v $BUILDd/t715-log.txt $shared715/$filename715.log 
+mv -v $BUILDd/repo.log $shared715/$filename715.repo.log 
+mv -v  $filename715*  $shared715 
+cd $shared715 
+ls -al 
+gdrive upload --parent $PixelPlus715G $filename715  &
 
 cd $BUILDd
 
 # build 810
-lunch aosp_gts210wifi-userdebug &&
-mka bacon -j$(nproc --all) | tee t810-log.txt &&
-cd $t810 &&
-ls -al &&
-filename=$(basename PixelExperience*.zip)  &&
-mv -v $BUILDd/t810-log.txt $shared810/$filename.log &&
-mv -v $BUILDd/repo.log $shared810/$filename.repo.log &&
-mv -v  $filename*  $shared810 &&
-cd $shared810 &&
-ls -al &&
-gdrive upload --parent $PixelPlus810G $filename  &
+lunch aosp_gts210wifi-userdebug 
+mka bacon -j$(nproc --all) | tee t810-log.txt 
+cd $t810 
+ls -al 
+filename810=$(basename PixelExperience*.zip)  
+mv -v $BUILDd/t810-log.txt $shared810/$filename810.log 
+mv -v $BUILDd/repo.log $shared810/$filename810.repo.log 
+mv -v  $filename810*  $shared810 
+cd $shared810 
+ls -al 
+gdrive upload --parent $PixelPlus810G $filename810  &
 
 cd $BUILDd
 
 # build 815
-lunch aosp_gts210ltexx-userdebug &&
-mka bacon -j$(nproc --all) | tee t815-log.txt &&
-cd $t815 &&
-ls -al &&
-filename=$(basename PixelExperience*.zip)  &&
-mv -v $BUILDd/t815-log.txt $shared815/$filename.log &&
-mv -v $BUILDd/repo.log $shared815/$filename.repo.log &&
-mv -v  $filename*  $shared815 &&
-cd $shared815 &&
-ls -al &&
-gdrive upload --parent $PixelPlus815G $filename  &
+lunch aosp_gts210ltexx-userdebug 
+mka bacon -j$(nproc --all) | tee t815-log.txt 
+cd $t815 
+ls -al 
+filename815=$(basename PixelExperience*.zip)  
+mv -v $BUILDd/t815-log.txt $shared815/$filename815.log 
+mv -v $BUILDd/repo.log $shared815/$filename815.repo.log 
+mv -v  $filename815*  $shared815 
+cd $shared815 
+ls -al 
+gdrive upload --parent $PixelPlus815G $filename815  &
 
 cd $BUILDd
 ls -al

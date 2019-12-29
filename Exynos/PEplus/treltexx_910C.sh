@@ -1,9 +1,13 @@
+#!/bin/bash
+
+#treltexx_910C.sh
+
+
+
 # Script to Build and Upload PixelPlus Exynos 5433 
-# Set Global Parameters
+
 # Server Specific compile settings
 . ~/bin/compile.sh
-# call google drive folder variables
-# to upload builds to google drive triplr.dev shared account
 
 # update repo file to home dir
 . ../../repo-update.sh
@@ -78,82 +82,7 @@ gdrive upload --parent $PEplus910C $filename910C
 
 cd $BUILDd
 
-# build trelteskt 910S
-lunch aosp_trelteskt-userdebug
-mka bacon -j$(nproc --all) | tee trelteskt-log.txt
-
-cd $out910S 
-ls -al 
-filename910S=$(basename *trelteskt*.zip) 
-mv -v $BUILDd/trelteskt-log.txt $shared910S/$filename910S.log
-mv -v  $filename*  $shared910S 
-cd $shared910S 
-ls -al 
-gdrive upload --parent $PEplus910S $filename910S  
-
-cd $BUILDd
-
-# build thpltexx 910U
-lunch aosp_tphltexx-userdebug
-mka bacon -j$(nproc --all) | tee tphltexx-log.txt
-
-cd $out910U
-ls -al 
-filename910U=$(basename *thpltexx*.zip) 
-mv -v $BUILDd/tphltexx-log.txt $shared910U/$filename910U.log
-mv -v  $filename*  $shared910U 
-cd $shared910U 
-ls -al 
-gdrive upload --parent $PEplus910U $filename910U  
-
-
-
-cd $BUILDd
-
-# build tbelteskt 915S
-lunch aosp_tbelteskt-userdebug
-mka bacon -j$(nproc --all) | tee tbeltekkt-log.txt
-
-cd $out915S
-ls -al 
-filename915S=$(basename *tbelteskt*.zip) 
-mv -v $BUILDd/tbelteskt-log.txt $shared915S/$filename915S.log
-mv -v  $filename*  $shared915S 
-cd $shared915S 
-ls -al 
-gdrive upload --parent $PEplus915S $filename915S  
-
-
-
-cd $BUILDd
-
-# build tre3calteskt 916S
-lunch aosp_tre3calteskt-userdebug
-mka bacon -j$(nproc --all) | tee tre3calteskt-log.txt
-
-cd $out916S
-ls -al 
-filename916S=$(basename *tre3calteskt*.zip) 
-mv -v $BUILDd/tre3calteskt-log.txt $shared916S/$filename916S.log
-mv -v  $filename*  $shared916S 
-cd $shared916S 
-ls -al 
-gdrive upload --parent $PixelPlus910Sg $filename910U  
-
-#################################################################################################
-cd $BUILDd 
 # && make clean
-
-
-
-
-# this combines all the below files into one build script
-#treltexx_910C.sh
-#trelteskt_910S.sh
-#tphltexx_910U.sh 
-#tbelteskt_915S.sh 
-#tre3calteskt_916S.sh 
-
 
 
 
