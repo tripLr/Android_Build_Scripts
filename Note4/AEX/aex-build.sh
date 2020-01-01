@@ -64,51 +64,54 @@ wget -O $ROOMd/AEX.xml $ROOMs
 # build trlte
 lunch aosp_trlte-userdebug
 mka aex -j$(nproc --all) | tee trlte-log.txt
+# Begin copy to shared and upload trlte
+cd $AEXtrlte
+ls -al
+filename_trlte=$(basename *trlte*.zip) 
+mv -v $BUILDd/trlte-log.txt $sharedTR/$filename_trlte.log
+mv -v $BUILDd/repo.log $sharedTR/$filename_trlte.repo.log
+mv -v  $filename_trlte*  $sharedTR
+mv -v $kernelTR/Image $sharedTR/$filename_trlte.img
+cd $sharedTR
+ls -al
+gdrive upload --parent $AEXtrlteG $filename_trlte & 
+gdrive upload --parent $AEXtrlteG $filename_trlte.img   
+gdrive upload --parent $AEXtrlteG $filename_trlte.md5sum  
 
+
+cd $BUILDd
 # build tblte
 lunch aosp_tblte-userdebug
 mka aex -j$(nproc --all) | tee tblte-log.txt
 
+cd $AEXtblte
+ls -al
+filename_tblte=$(basename Aosp*.zip)
+mv -v $BUILDd/tblte-log.txt $sharedTB/$filename_tblte.log
+mv -v  $filename_tblte*  $sharedTB
+mv -v $kernelTB/Image $sharedTB/$filename_tblte.img
+cd $sharedTB
+ls -al
+gdrive upload --parent $AEXtblteG $filename_tblte &&
+gdrive upload --parent $AEXtblteG $filename_tblte.img &&
+gdrive upload --parent $AEXtblteG $filename_tblte.md5sum 
+
+cd $BUILDd
 # build trlteduos
 lunch aosp_trlteduos-userdebug
 mka aex -j$(nproc --all) | tee trlteduos-log.txt
 
-# Begin copy to shared and upload trlte
-cd $AEXtrlte
-ls -al
-filename=$(basename Aosp*.zip) 
-mv -v $BUILDd/trlte-log.txt $sharedTR/$filename.log
-mv -v $BUILDd/repo.log $sharedTR/$filename.repo.log
-mv -v  $filename*  $sharedTR
-mv -v $kernelTR/Image $sharedTR/$filename.img
-cd $sharedTR
-ls -al
-gdrive upload --parent $AEXtrlteG $filename && 
-gdrive upload --parent $AEXtrlteG $filename.img && 
-gdrive upload --parent $AEXtrlteG $filename.md5sum  
-# Begin copy to shared and upload tblte
-cd $AEXtblte
-ls -al
-filename=$(basename Aosp*.zip)
-mv -v $BUILDd/tblte-log.txt $sharedTB/$filename.log
-mv -v  $filename*  $sharedTB
-mv -v $kernelTB/Image $sharedTB/$filename.img
-cd $sharedTB
-ls -al
-gdrive upload --parent $AEXtblteG $filename &&
-gdrive upload --parent $AEXtblteG $filename.img &&
-gdrive upload --parent $AEXtblteG $filename.md5sum 
 # Begin copy to shared and upload trlteduos
 cd $AEXtrlteduos
 ls -al
-filename=$(basename Aosp*.zip)
-mv -v $BUILDd/trlteduos-log.txt $sharedTD/$filename.log
-mv -v  $filename*  $sharedTD
-mv -v $kernelTD/Image $sharedTD/$filename.img
+filename_duos=$(basename Aosp*.zip)
+mv -v $BUILDd/trlteduos-log.txt $sharedTD/$filename_duos.log
+mv -v  $filename_duos*  $sharedTD
+mv -v $kernelTD/Image $sharedTD/$filename_duos.img
 cd $sharedTD
 ls -al
-gdrive upload --parent $AEXtrlteduosG $filename 
-gdrive upload --parent $AEXtrlteduosG $filename.img 
-gdrive upload --parent $AEXtrlteduosG $filename.md5sum 
+gdrive upload --parent $AEXtrlteduosG $filename_duos 
+gdrive upload --parent $AEXtrlteduosG $filename_duos.img 
+gdrive upload --parent $AEXtrlteduosG $filename_duos.md5sum 
 cd $BUILDd
 make clean &
