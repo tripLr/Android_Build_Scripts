@@ -106,7 +106,7 @@ lunch aosp_gts210ltexx-userdebug
 mka bacon -j$(nproc --all) | tee t815-log.txt 
 cd $t815 
 ls -al 
-filename815=$(basename *gts210ltexx*.zip)  
+filename815=$(basename PixelExperience*.zip)  
 mv -v $BUILDd/t815-log.txt $shared815/$filename815.log 
 mv -v $BUILDd/repo.log $shared815/$filename815.repo.log 
 mv -v  $filename815*  $shared815 
