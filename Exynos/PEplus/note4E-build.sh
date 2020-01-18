@@ -48,7 +48,7 @@ export PEplus916S='1UD8uyRcYV3NI8pohsVRwjWLFQ8lvFz8B'
 
 
 cd $BUILDd
-# make clean
+make clean
 
 # remove room service files
 rm -v $ROOMd/*.xml

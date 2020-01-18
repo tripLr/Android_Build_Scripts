@@ -16,6 +16,7 @@ if
    [ ! -d $INITd ];
    	then
 	mkdir -pv $INITd;
+	cd $BUILDd ;
 	repo init --depth=1 -u git://github.com/AospExtended/manifest.git -b 9.x ;
 	repo sync -c --force-sync --no-clone-bundle --no-tags	;
 	echo "REPO init and sync complete"		

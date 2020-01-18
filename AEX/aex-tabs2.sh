@@ -80,50 +80,49 @@ mka aex -j$(nproc --all) | tee t815-log.txt
 # Begin copy to shared and upload trlte
 cd $t710
 ls -al
-filename=$(basename Aosp*.zip) 
-mv -v $BUILDd/t710-log.txt $shared710/$filename.log
-mv -v $BUILDd/repo.log $shared710/$filename.repo.log
-mv -v  $710k/Image $shared710
-mv -v  $filename*  $shared710
+filename710=$(basename Aosp*.zip) 
+cp -v $BUILDd/t710-log.txt $shared710/$filename710.log
+cp -v $BUILDd/repo.log $shared710/$filename710.repo.log
+cp -v  $710k/Image $shared710
+cp -v  $filename710*  $shared710
 cd $shared710
 ls -al
-gdrive upload --parent $AEX710G $filename 
+gdrive upload --parent $AEX710G $filename710 
 
 cd $t715
 ls -al
-filename=$(basename Aosp*.zip) 
-mv -v $BUILDd/t715-log.txt $shared715/$filename.log
-mv -v $BUILDd/repo.log $shared715/$filename.repo.log
-mv -v  $715k/Image $shared715
-mv -v  $filename*  $shared715
+filename715=$(basename Aosp*.zip) 
+cp -v $BUILDd/t715-log.txt $shared715/$filename715.log
+cp -v $BUILDd/repo.log $shared715/$filename715.repo.log
+cp -v  $715k/Image $shared715
+cp -v  $filename715*  $shared715
 cd $shared715
 ls -al
-gdrive upload --parent $AEX715G $filename 
+gdrive upload --parent $AEX715G $filename715 
 
 cd $t810
 ls -al
-filename=$(basename Aosp*.zip) 
-mv -v $BUILDd/t810-log.txt $shared810/$filename.log
-mv -v $BUILDd/repo.log $shared810/$filename.repo.log
-mv -v  $810k/Image $shared810
-mv -v  $filename*  $shared810
+filename810=$(basename Aosp*.zip) 
+cp -v $BUILDd/t810-log.txt $shared810/$filename810.log
+cp -v $BUILDd/repo.log $shared810/$filename810.repo.log
+cp -v  $810k/Image $shared810
+cp -v  $filename810*  $shared810
 cd $shared810
 ls -al
-gdrive upload --parent $AEX810G $filename 
+gdrive upload --parent $AEX810G $filename810 
 
 cd $t815
 ls -al
 filename=$(basename Aosp*.zip) 
-mv -v $BUILDd/t815-log.txt $shared815/$filename.log
-mv -v $BUILDd/repo.log $shared815/$filename.repo.log
-mv -v  $815k/Image $shared815
-mv -v  $filename*  $shared815
+cp -v $BUILDd/t815-log.txt $shared815/$filename.log
+cp -v $BUILDd/repo.log $shared815/$filename.repo.log
+cp -v  $815k/Image $shared815
+cp -v  $filename*  $shared815
 cd $shared815
 ls -al
 gdrive upload --parent $AEX815G $filename 
 
-
-ls -al
 cd $BUILDd
+ls -al
 make clean
 echo 'enjoy aex for Exynos tab s2'

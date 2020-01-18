@@ -39,7 +39,7 @@ export PixelPlus815G='1jA4MGBKDs7J2uyVZLj3wAy4eTnoAwUK4'
 
 
 cd $BUILDd
-# make clean
+make clean
 
 # remove room service files
 rm -v $ROOMd/*.xml
@@ -61,7 +61,7 @@ mka bacon -j$(nproc --all) | tee t710-log.txt
 # Begin copy to shared and upload trlte
 cd $t710  
 ls -al 
-filename710=$(basename PixelExperience*.zip)  
+filename710=$(basename *gts28wifi*.zip)  
 mv -v $BUILDd/t710-log.txt $shared710/$filename710.log 
 mv -v $BUILDd/repo.log $shared710/$filename710.repo.log 
 mv -v  $filename710*  $shared710 
@@ -76,7 +76,7 @@ lunch aosp_gts28ltexx-userdebug
 mka bacon -j$(nproc --all) | tee t715-log.txt 
 cd $t715 
 ls -al 
-filename715=$(basename PixelExperience*.zip) 
+filename715=$(basename *gts28ltexx*.zip) 
 mv -v $BUILDd/t715-log.txt $shared715/$filename715.log 
 mv -v $BUILDd/repo.log $shared715/$filename715.repo.log 
 mv -v  $filename715*  $shared715 
@@ -91,7 +91,7 @@ lunch aosp_gts210wifi-userdebug
 mka bacon -j$(nproc --all) | tee t810-log.txt 
 cd $t810 
 ls -al 
-filename810=$(basename PixelExperience*.zip)  
+filename810=$(basename *gs210wifi*.zip)  
 mv -v $BUILDd/t810-log.txt $shared810/$filename810.log 
 mv -v $BUILDd/repo.log $shared810/$filename810.repo.log 
 mv -v  $filename810*  $shared810 
@@ -116,5 +116,5 @@ gdrive upload --parent $PixelPlus815G $filename815  &
 
 cd $BUILDd
 ls -al
-
+make clean
 echo "Happy Flashing !!"
