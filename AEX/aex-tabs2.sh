@@ -64,31 +64,22 @@ repo sync -c -j32 --force-sync --no-clone-bundle --no-tags | tee repo.log
 # build 710
 lunch aosp_gts28wifi-userdebug
 mka aex -j$(nproc --all) | tee t710-log.txt
-
-# build 715
-lunch aosp_gts28ltexx-userdebug
-mka aex -j$(nproc --all) | tee t715-log.txt
-
-# build 810
-lunch aosp_gts210wifi-userdebug
-mka aex -j$(nproc --all) | tee t810-log.txt
-
-# build 815
-lunch aosp_gts210ltexx-userdebug
-mka aex -j$(nproc --all) | tee t815-log.txt
-
 # Begin copy to shared and upload trlte
 cd $t710
 ls -al
-filename710=$(basename Aosp*.zip) 
+filename710=$(basename Aosp*.zip)
 cp -v $BUILDd/t710-log.txt $shared710/$filename710.log
 cp -v $BUILDd/repo.log $shared710/$filename710.repo.log
 cp -v  $710k/Image $shared710
 cp -v  $filename710*  $shared710
 cd $shared710
 ls -al
-gdrive upload --parent $AEX710G $filename710 
-
+gdrive upload --parent $AEX710G $filename710 &
+cd $BUILDd
+#
+# build 715
+lunch aosp_gts28ltexx-userdebug
+mka aex -j$(nproc --all) | tee t715-log.txt
 cd $t715
 ls -al
 filename715=$(basename Aosp*.zip) 
@@ -98,8 +89,13 @@ cp -v  $715k/Image $shared715
 cp -v  $filename715*  $shared715
 cd $shared715
 ls -al
-gdrive upload --parent $AEX715G $filename715 
+gdrive upload --parent $AEX715G $filename715 &
+cd $BUILDd
+#
 
+# build 810
+lunch aosp_gts210wifi-userdebug
+mka aex -j$(nproc --all) | tee t810-log.txt
 cd $t810
 ls -al
 filename810=$(basename Aosp*.zip) 
@@ -109,7 +105,13 @@ cp -v  $810k/Image $shared810
 cp -v  $filename810*  $shared810
 cd $shared810
 ls -al
-gdrive upload --parent $AEX810G $filename810 
+gdrive upload --parent $AEX810G $filename810 &
+cd $BUILDd
+#
+
+# build 815
+lunch aosp_gts210ltexx-userdebug
+mka aex -j$(nproc --all) | tee t815-log.txt
 
 cd $t815
 ls -al
@@ -120,9 +122,27 @@ cp -v  $815k/Image $shared815
 cp -v  $filename*  $shared815
 cd $shared815
 ls -al
-gdrive upload --parent $AEX815G $filename 
+gdrive upload --parent $AEX815G $filename &
+cd $BUILDd
+
+# build note 4 exynos
+lunch aosp_treltexx-userdebug
+mka aex -j$(nproc --all) | tee treltexx.log.txt
+#
+lunch aosp_trelteskt-userdebug 
+mka aex -j$(nproc --all) | tee trelteskt.log.txt
+#
+lunch aosp_trhpltexx-userdebug
+mka aex -j$(nproc --all) | tee trhpltexx.log.txt
+#
+lunch aosp_tre3calteskt-userdebug
+mka aex -j$(nproc --all) | tee tre3calteskt.log.txt
+#
+lunch aosp_tbelteskt-userdebug
+mka aex -j$(nproc --all) | tee tbelteskt.log.txt
+
 
 cd $BUILDd
 ls -al
-make clean
+#make clean
 echo 'enjoy aex for Exynos tab s2'
