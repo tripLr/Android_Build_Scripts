@@ -1,4 +1,4 @@
-# Script to Build and Upload AEX TRLTE
+# Script to Build and Upload AEX gts28wifi smt-710
 # Set Global Parameters
 # Server Specific compile settings
 . ~/bin/compile.sh
@@ -34,15 +34,7 @@ export ROOMs=https://raw.githubusercontent.com/Exynos5433/local_manifests/aex-pi
 # copy finished compiles to internal RAID storage on server
 
 export shared710='/home/shared/triplr/builds/AEX710'
-export shared715='/home/shared/triplr/builds/AEX715'
-export shared810='/home/shared/triplr/builds/AEX810'
-export shared815='/home/shared/triplr/builds/AEX815'
-
 export t710=$out_dir/AEX/target/product/gts28wifi
-export t715=$out_dir/AEX/target/product/gts28ltexx
-export t810=$out_dir/AEX/target/product/gts210wifi
-export t815=$out_dir/AEX/target/product/gts210ltexx
-
 cd $BUILDd
 make clean
 
@@ -59,21 +51,16 @@ repo sync -c -j32 --force-sync --no-clone-bundle --no-tags | tee repo.log
 lunch aosp_gts28wifi-userdebug
 mka aex -j$(nproc --all) | tee t710-log.txt
 
-# build 715
-#lunch aosp_tblte-userdebug
-#mka aex -j$(nproc --all) | tee tblte-log.txt
-
-# build trlteduos
-#lunch aosp_trlteduos-userdebug
-#mka aex -j$(nproc --all) | tee trlteduos-log.txt
-
-# Begin copy to shared and upload trlte
+# Begin copy to shared and upload gts28wifi 
 cd $t710
 ls -al
-filename=$(basename Aosp*.zip) 
-mv -v $BUILDd/710-log.txt $shared710/$filename.log
+filename710=$(basename *gts28wifi*.zip) 
+mv -v $BUILDd/t710-log.txt $shared710/$filename.log
 mv -v $BUILDd/repo.log $shared710/$filename.repo.log
-mv -v  $filename*  $shared710
+mv -v  $filename710*  $shared710
 cd $shared710
 ls -al
-gdrive upload --parent $AEX710G $filename && cd $BUILDd && make clean
+gdrive upload --parent $AEX710G $filename710 
+cd $BUILDd
+
+echo "compile and upload complete"

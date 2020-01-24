@@ -21,11 +21,11 @@ echo " using triplr room service for exynos master devices "
 export ROOMs=https://raw.githubusercontent.com/tripLr/local_manifests-1/pixel-pie/exynos5433-master.xml
 
 # finished compiles to internal RAID storage on server
-#  treltexx   	910C /home/shared/OUT_DIR/triplr/PixelPlus/target/product/gts210ltexx
+#  treltexx   	910C /home/shared/OUT_DIR/triplr/PixelPlus/target/product/treltexx
 #  trelteskt  	910S /home/shared/OUT_DIR/triplr/PixelPlus/target/product/trelteskt
-#  tphltexx  	910U /home/shared/OUT_DIR/triplr/PixelPlus/target/product/trelteskt
-##  tbelteskt  	915S /home/shared/OUT_DIR/triplr/PixelPlus/target/product/tre3calteskt
-##  tre3calteskt 916S /home/shared/OUT_DIR/triplr/PixelPlus/target/product/tre3calteskt
+#  tphltexx  	910U /home/shared/OUT_DIR/triplr/PixelPlus/target/product/tphltexx
+#  tbelteskt  	915S /home/shared/OUT_DIR/triplr/PixelPlus/target/product/tbelteskt
+#  tre3calteskt 916S /home/shared/OUT_DIR/triplr/PixelPlus/target/product/tre3calteskt
 
 export shared910C='/home/shared/triplr/builds/PixelPlus910C'
 export shared910S='/home/shared/triplr/builds/PixelPlus910S'
@@ -34,19 +34,18 @@ export shared915S='/home/shared/triplr/builds/PixelPlus915S'
 export shared916S='/home/shared/triplr/builds/PixelPlus916S'
 
 #  out dir's
-export out910C="$out_dir/PixelPlus/target/product/gts210ltexx"
+export out910C="$out_dir/PixelPlus/target/product/treltexx"
 export out910S="$out_dir/PixelPlus/target/product/trelteskt"
-export out910U="$out_dir/PixelPlus/target/product/trelteskt"
-export out915S="$out_dir/PixelPlus/target/product/tre3calteskt"
+export out910U="$out_dir/PixelPlus/target/product/tphltexx"
+export out915S="$out_dir/PixelPlus/target/product/tbelteskt"
 export out916S="$out_dir/PixelPlus/target/product/tre3calteskt"
 
 # google drive folders
-export PEplus910C='1Hz3126Gd4N_-JRI3OB3DWPV-3qJc-cOA'
-export PEplus910S='1sdvDQ1gJ6A-niGI14bak9giQPCwgku89'
-export PEplus910U='1QG5vKhSnFkmBnFqdKyK1aZv38QYRL8KQ'
-export PEplus915S='1hAK-RE72POmse3OQ4AeG8fyejAlyjjum'
-export PEplus916S='1UD8uyRcYV3NI8pohsVRwjWLFQ8lvFz8B'
-
+export AEX910C='18GW22NU1S51N-eDMD_yoJhxwQ584efKW'
+export AEX910S='1RosSJ7u1da5-80zYKsL8K0Cm88SUVjm2'
+export AEX910U='1c9zyTsg1I4lO_9zTfuxd3dYeKeLzDAg4'
+export AEX915S='1VOM1VnHwE8EDU3cH7Qbt9EIm8gO6AnJJ'
+export AEX916S='1GceKAhc8-IA8gj_wrQllfac6c8G_NJUe'
 
 
 cd $BUILDd

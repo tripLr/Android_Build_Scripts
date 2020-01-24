@@ -19,24 +19,24 @@ echo " using triplr room service for exynos master devices "
 export ROOMs=https://raw.githubusercontent.com/tripLr/local_manifests-1/aex-pie/exynos5433-master.xml
 
 # finished compiles to internal RAID storage on server
-#  treltexx   	910C /home/shared/OUT_DIR/triplr/AEX/target/product/gts210ltexx
-#  trelteskt  	910S /home/shared/OUT_DIR/triplr/AEX/target/product/trelteskt
-#  tphltexx  	910U /home/shared/OUT_DIR/triplr/AEX/target/product/trelteskt
-##  tbelteskt  	915S /home/shared/OUT_DIR/triplr/AEX/target/product/tre3calteskt
-##  tre3calteskt 916S /home/shared/OUT_DIR/triplr/AEX/target/product/tre3calteskt
+#  treltexx     910C /home/shared/OUT_DIR/triplr/PixelPlus/target/product/treltexx
+#  trelteskt    910S /home/shared/OUT_DIR/triplr/PixelPlus/target/product/trelteskt
+#  tphltexx     910U /home/shared/OUT_DIR/triplr/PixelPlus/target/product/tphltexx
+#  tbelteskt    915S /home/shared/OUT_DIR/triplr/PixelPlus/target/product/tbelteskt
+#  tre3calteskt 916S /home/shared/OUT_DIR/triplr/PixelPlus/target/product/tre3calteskt
 
-export shared910C='/home/shared/triplr/builds/AEX910C'
-export shared910S='/home/shared/triplr/builds/AEX910S'
-export shared910U='/home/shared/triplr/builds/AEX910U'
-export shared915S='/home/shared/triplr/builds/AEX915S'
-export shared916S='/home/shared/triplr/builds/AEX916S'
+export shared910C='/home/shared/triplr/builds/PixelPlus910C'
+export shared910S='/home/shared/triplr/builds/PixelPlus910S'
+export shared910U='/home/shared/triplr/builds/PixelPlus910U'
+export shared915S='/home/shared/triplr/builds/PixelPlus915S'
+export shared916S='/home/shared/triplr/builds/PixelPlus916S'
 
 #  out dir's
-export out910C="$out_dir/AEX/target/product/treltexx"
-export out910S="$out_dir/AEX/target/product/trelteskt"
-export out910U="$out_dir/AEX/target/product/tphltexx"
-export out915S="$out_dir/AEX/target/product/tbelteskt"
-export out916S="$out_dir/AEX/target/product/tre3calteskt"
+export out910C="$out_dir/PixelPlus/target/product/treltexx"
+export out910S="$out_dir/PixelPlus/target/product/trelteskt"
+export out910U="$out_dir/PixelPlus/target/product/tphltexx"
+export out915S="$out_dir/PixelPlus/target/product/tbelteskt"
+export out916S="$out_dir/PixelPlus/target/product/tre3calteskt"
 
 # google drive folders
 export AEX910C='18GW22NU1S51N-eDMD_yoJhxwQ584efKW'
@@ -44,7 +44,6 @@ export AEX910S='1RosSJ7u1da5-80zYKsL8K0Cm88SUVjm2'
 export AEX910U='1c9zyTsg1I4lO_9zTfuxd3dYeKeLzDAg4'
 export AEX915S='1VOM1VnHwE8EDU3cH7Qbt9EIm8gO6AnJJ'
 export AEX916S='1GceKAhc8-IA8gj_wrQllfac6c8G_NJUe'
-
 
 
 cd $BUILDd
@@ -74,7 +73,7 @@ mv -v $BUILDd/treltexx-log.txt $shared910C/$filename910C.log
 mv -v  $filename910C*  $shared910C 
 cd $shared910C 
 ls -al 
-gdrive upload --parent $AEX910C $filename910C  
+gdrive upload --parent $AEX910C $filename910C & 
 
 cd $BUILDd
 
@@ -89,10 +88,11 @@ mv -v $BUILDd/trelteskt-log.txt $shared910S/$filename910S.log
 mv -v  $filename910S*  $shared910S 
 cd $shared910S 
 ls -al 
-gdrive upload --parent $AEX910S $filename910S  
+gdrive upload --parent $AEX910S $filename910S  &
 
 cd $BUILDd
 
+# no ril at this time do not build
 # build thpltexx 910U
 #lunch aosp_tphltexx-userdebug
 #mka aex -j$(nproc --all) | tee tphltexx-log.txt
@@ -104,7 +104,7 @@ cd $BUILDd
 #mv -v  $filename910U*  $shared910U 
 #cd $shared910U 
 #ls -al 
-#gdrive upload --parent $AEX910U $filename910U  
+#gdrive upload --parent $AEX910U $filename910U  &
 
 
 
@@ -121,7 +121,7 @@ mv -v $BUILDd/tbelteskt-log.txt $shared915S/$filename915S.log
 mv -v  $filename915S*  $shared915S 
 cd $shared915S 
 ls -al 
-gdrive upload --parent $AEX915S $filename915S  
+gdrive upload --parent $AEX915S $filename915S  &
 
 
 
@@ -139,12 +139,7 @@ mv -v  $filename916S*  $shared916S
 cd $shared916S 
 ls -al 
 gdrive upload --parent $AEX910Sg $filename910U  
-
-#################################################################################################
 cd $BUILDd 
-# && make clean
-
-
 
 
 # this combines all the below files into one build script
@@ -153,9 +148,6 @@ cd $BUILDd
 #tphltexx_910U.sh 
 #tbelteskt_915S.sh 
 #tre3calteskt_916S.sh 
-
-
-
 
 
 
