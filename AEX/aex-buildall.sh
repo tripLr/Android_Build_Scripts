@@ -2,10 +2,9 @@
 
 
 export SCRIPTd=~/github/triplr/Build_Scripts/AEX
-export BUILDd=~/android/9/AEX
+export ANDROIDd=~/android/9/AEX
 
-cd $BUILDd
-make clean
+cd $ANDROIDd
 
 
 . $SCRIPTd/aex-init.sh

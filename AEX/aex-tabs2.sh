@@ -49,14 +49,12 @@ export t810k=$out_dir/AEX/target/product/gts210wifi/obj/KERNEL_OBJ/arch/arm/boot
 export t815k=$out_dir/AEX/target/product/gts210ltexx/obj/KERNEL_OBJ/arch/arm/boot
 
 cd $BUILDd
-# make clean
 
 # remove room service files
 rm -v $ROOMd/*.xml
 # install from web roomservice
 wget -O $ROOMd/AEX.xml $ROOMs
 repo sync -c -j32 --force-sync --no-clone-bundle --no-tags | tee repo.log
-
 
 # set environment for build 
 . build/envsetup.sh
@@ -67,26 +65,26 @@ mka aex -j$(nproc --all) | tee t710-log.txt
 # Begin copy to shared and upload trlte
 cd $t710
 ls -al
-filename710=$(basename Aosp*.zip)
-cp -v $BUILDd/t710-log.txt $shared710/$filename710.log
-cp -v $BUILDd/repo.log $shared710/$filename710.repo.log
-cp -v  $710k/Image $shared710
-cp -v  $filename710*  $shared710
+filename710=$(basename *gts28wifi*.zip)
+mv -v $BUILDd/t710-log.txt $shared710/$filename710.log
+mv -v $BUILDd/repo.log $shared710/$filename710.repo.log
+mv -v  $710k/Image $shared710/$filename710.img
+mv -v  $filename710*  $shared710
 cd $shared710
 ls -al
 gdrive upload --parent $AEX710G $filename710 &
 cd $BUILDd
-#
+
 # build 715
 lunch aosp_gts28ltexx-userdebug
 mka aex -j$(nproc --all) | tee t715-log.txt
 cd $t715
 ls -al
-filename715=$(basename Aosp*.zip) 
-cp -v $BUILDd/t715-log.txt $shared715/$filename715.log
-cp -v $BUILDd/repo.log $shared715/$filename715.repo.log
-cp -v  $715k/Image $shared715
-cp -v  $filename715*  $shared715
+filename715=$(basename *gts28ltexx*.zip) 
+mv -v $BUILDd/t715-log.txt $shared715/$filename715.log
+mv -v $BUILDd/repo.log $shared715/$filename715.repo.log
+mv -v  $715k/Image $shared715/$filename715.img
+mv -v  $filename715*  $shared715
 cd $shared715
 ls -al
 gdrive upload --parent $AEX715G $filename715 &
@@ -98,11 +96,11 @@ lunch aosp_gts210wifi-userdebug
 mka aex -j$(nproc --all) | tee t810-log.txt
 cd $t810
 ls -al
-filename810=$(basename Aosp*.zip) 
-cp -v $BUILDd/t810-log.txt $shared810/$filename810.log
-cp -v $BUILDd/repo.log $shared810/$filename810.repo.log
-cp -v  $810k/Image $shared810
-cp -v  $filename810*  $shared810
+filename810=$(basename *gts210wifi*.zip) 
+mv -v $BUILDd/t810-log.txt $shared810/$filename810.log
+mv -v $BUILDd/repo.log $shared810/$filename810.repo.log
+mv -v  $810k/Image $shared810/$filename810.img
+mv -v  $filename810*  $shared810
 cd $shared810
 ls -al
 gdrive upload --parent $AEX810G $filename810 &
@@ -115,34 +113,14 @@ mka aex -j$(nproc --all) | tee t815-log.txt
 
 cd $t815
 ls -al
-filename=$(basename Aosp*.zip) 
-cp -v $BUILDd/t815-log.txt $shared815/$filename.log
-cp -v $BUILDd/repo.log $shared815/$filename.repo.log
-cp -v  $815k/Image $shared815
-cp -v  $filename*  $shared815
+filename815=$(basename *gts210ltexx*.zip) 
+mv -v $BUILDd/t815-log.txt $shared815/$filename.log
+mv -v $BUILDd/repo.log $shared815/$filename.repo.log
+mv -v  $815k/Image $shared815/$filename815.img
+mv -v  $filename815*  $shared815
 cd $shared815
 ls -al
 gdrive upload --parent $AEX815G $filename &
 cd $BUILDd
-
-# build note 4 exynos
-lunch aosp_treltexx-userdebug
-mka aex -j$(nproc --all) | tee treltexx.log.txt
-#
-lunch aosp_trelteskt-userdebug 
-mka aex -j$(nproc --all) | tee trelteskt.log.txt
-#
-lunch aosp_trhpltexx-userdebug
-mka aex -j$(nproc --all) | tee trhpltexx.log.txt
-#
-lunch aosp_tre3calteskt-userdebug
-mka aex -j$(nproc --all) | tee tre3calteskt.log.txt
-#
-lunch aosp_tbelteskt-userdebug
-mka aex -j$(nproc --all) | tee tbelteskt.log.txt
-
-
-cd $BUILDd
 ls -al
-#make clean
 echo 'enjoy aex for Exynos tab s2'

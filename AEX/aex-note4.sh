@@ -32,7 +32,6 @@ export ROOMs=https://raw.githubusercontent.com/triplr-dev/local_manifests/aex-9.
 
 #trlte out
 export AEXtrlte=$out_dir/AEX/target/product/trlte
-#                        /AEX/target/product/trlte/obj/KERNEL_OBJ/arch/arm/boot
 export kernelTR=$out_dir/AEX/target/product/trlte/obj/KERNEL_OBJ/arch/arm/boot
 
 # tblte out
@@ -68,7 +67,7 @@ mka aex -j$(nproc --all) | tee trlte-log.txt
 cd $AEXtrlte
 ls -al
 filename_trlte=$(basename *trlte*.zip) 
-mv -v $BUILDd/trlte-log.txt $sharedTR/$filename_trlte.log
+cp -v $BUILDd/trlte-log.txt $sharedTR/$filename_trlte.log
 mv -v $BUILDd/repo.log $sharedTR/$filename_trlte.repo.log
 mv -v  $filename_trlte*  $sharedTR
 mv -v $kernelTR/Image $sharedTR/$filename_trlte.img
@@ -87,7 +86,7 @@ mka aex -j$(nproc --all) | tee tblte-log.txt
 cd $AEXtblte
 ls -al
 filename_tblte=$(basename Aosp*.zip)
-mv -v $BUILDd/tblte-log.txt $sharedTB/$filename_tblte.log
+cp -v $BUILDd/tblte-log.txt $sharedTB/$filename_tblte.log
 mv -v  $filename_tblte*  $sharedTB
 mv -v $kernelTB/Image $sharedTB/$filename_tblte.img
 cd $sharedTB
@@ -105,7 +104,7 @@ mka aex -j$(nproc --all) | tee trlteduos-log.txt
 cd $AEXtrlteduos
 ls -al
 filename_duos=$(basename Aosp*.zip)
-mv -v $BUILDd/trlteduos-log.txt $sharedTD/$filename_duos.log
+cp -v $BUILDd/trlteduos-log.txt $sharedTD/$filename_duos.log
 mv -v  $filename_duos*  $sharedTD
 mv -v $kernelTD/Image $sharedTD/$filename_duos.img
 cd $sharedTD

@@ -19,24 +19,24 @@ echo " using triplr room service for exynos master devices "
 export ROOMs=https://raw.githubusercontent.com/tripLr/local_manifests-1/aex-pie/exynos5433-master.xml
 
 # finished compiles to internal RAID storage on server
-#  treltexx     910C /home/shared/OUT_DIR/triplr/PixelPlus/target/product/treltexx
-#  trelteskt    910S /home/shared/OUT_DIR/triplr/PixelPlus/target/product/trelteskt
-#  tphltexx     910U /home/shared/OUT_DIR/triplr/PixelPlus/target/product/tphltexx
-#  tbelteskt    915S /home/shared/OUT_DIR/triplr/PixelPlus/target/product/tbelteskt
-#  tre3calteskt 916S /home/shared/OUT_DIR/triplr/PixelPlus/target/product/tre3calteskt
+#  treltexx     910C /home/shared/OUT_DIR/triplr/AEX/target/product/treltexx
+#  trelteskt    910S /home/shared/OUT_DIR/triplr/AEX/target/product/trelteskt
+#  tphltexx     910U /home/shared/OUT_DIR/triplr/AEX/target/product/tphltexx
+#  tbelteskt    915S /home/shared/OUT_DIR/triplr/AEX/target/product/tbelteskt
+#  tre3calteskt 916S /home/shared/OUT_DIR/triplr/AEX/target/product/tre3calteskt
 
-export shared910C='/home/shared/triplr/builds/PixelPlus910C'
-export shared910S='/home/shared/triplr/builds/PixelPlus910S'
-export shared910U='/home/shared/triplr/builds/PixelPlus910U'
-export shared915S='/home/shared/triplr/builds/PixelPlus915S'
-export shared916S='/home/shared/triplr/builds/PixelPlus916S'
+export shared910C='/home/shared/triplr/builds/AEX910C'
+export shared910S='/home/shared/triplr/builds/AEX910S'
+export shared910U='/home/shared/triplr/builds/AEX910U'
+export shared915S='/home/shared/triplr/builds/AEX915S'
+export shared916S='/home/shared/triplr/builds/AEX916S'
 
 #  out dir's
-export out910C="$out_dir/PixelPlus/target/product/treltexx"
-export out910S="$out_dir/PixelPlus/target/product/trelteskt"
-export out910U="$out_dir/PixelPlus/target/product/tphltexx"
-export out915S="$out_dir/PixelPlus/target/product/tbelteskt"
-export out916S="$out_dir/PixelPlus/target/product/tre3calteskt"
+export out910C="$out_dir/AEX/target/product/treltexx"
+export out910S="$out_dir/AEX/target/product/trelteskt"
+export out910U="$out_dir/AEX/target/product/tphltexx"
+export out915S="$out_dir/AEX/target/product/tbelteskt"
+export out916S="$out_dir/AEX/target/product/tre3calteskt"
 
 # google drive folders
 export AEX910C='18GW22NU1S51N-eDMD_yoJhxwQ584efKW'
@@ -69,7 +69,7 @@ mka aex -j$(nproc --all) | tee treltexx-log.txt
 cd $out910C 
 ls -al 
 filename910C=$(basename *treltexx*.zip)  
-mv -v $BUILDd/treltexx-log.txt $shared910C/$filename910C.log 
+cp -v $BUILDd/treltexx-log.txt $shared910C/$filename910C.log 
 mv -v  $filename910C*  $shared910C 
 cd $shared910C 
 ls -al 
@@ -84,7 +84,7 @@ mka aex -j$(nproc --all) | tee trelteskt-log.txt
 cd $out910S 
 ls -al 
 filename910S=$(basename *trelteskt*.zip) 
-mv -v $BUILDd/trelteskt-log.txt $shared910S/$filename910S.log
+cp -v $BUILDd/trelteskt-log.txt $shared910S/$filename910S.log
 mv -v  $filename910S*  $shared910S 
 cd $shared910S 
 ls -al 
@@ -100,7 +100,7 @@ cd $BUILDd
 #cd $out910U
 #ls -al 
 #filename910U=$(basename *thpltexx*.zip) 
-#mv -v $BUILDd/tphltexx-log.txt $shared910U/$filename910U.log
+#cp -v $BUILDd/tphltexx-log.txt $shared910U/$filename910U.log
 #mv -v  $filename910U*  $shared910U 
 #cd $shared910U 
 #ls -al 
@@ -112,12 +112,12 @@ cd $BUILDd
 
 # build tbelteskt 915S
 lunch aosp_tbelteskt-userdebug
-mka aex -j$(nproc --all) | tee tbeltekkt-log.txt
+mka aex -j$(nproc --all) | tee tbelteskt-log.txt
 
 cd $out915S
 ls -al 
 filename915S=$(basename *tbelteskt*.zip) 
-mv -v $BUILDd/tbelteskt-log.txt $shared915S/$filename915S.log
+cp -v $BUILDd/tbelteskt-log.txt $shared915S/$filename915S.log
 mv -v  $filename915S*  $shared915S 
 cd $shared915S 
 ls -al 
@@ -134,7 +134,7 @@ mka aex -j$(nproc --all) | tee tre3calteskt-log.txt
 cd $out916S
 ls -al 
 filename916S=$(basename *tre3calteskt*.zip) 
-mv -v $BUILDd/tre3calteskt-log.txt $shared916S/$filename916S.log
+cp -v $BUILDd/tre3calteskt-log.txt $shared916S/$filename916S.log
 mv -v  $filename916S*  $shared916S 
 cd $shared916S 
 ls -al 
