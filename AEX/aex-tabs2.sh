@@ -54,7 +54,7 @@ cd $BUILDd
 rm -v $ROOMd/*.xml
 # install from web roomservice
 wget -O $ROOMd/AEX.xml $ROOMs
-repo sync -c -j32 --force-sync --no-clone-bundle --no-tags | tee repo.log
+repo sync -c -j32 --force-sync --no-clone-bundle --no-tags | tee repo-tabs2.log
 
 # set environment for build 
 . build/envsetup.sh
@@ -66,8 +66,8 @@ mka aex -j$(nproc --all) | tee t710-log.txt
 cd $t710
 ls -al
 filename710=$(basename *gts28wifi*.zip)
-mv -v $BUILDd/t710-log.txt $shared710/$filename710.log
-mv -v $BUILDd/repo.log $shared710/$filename710.repo.log
+cp -v $BUILDd/t710-log.txt $shared710/$filename710.log
+cp -v $BUILDd/repo-tabs2.log $shared710/$filename710.repo.log
 mv -v  $710k/Image $shared710/$filename710.img
 mv -v  $filename710*  $shared710
 cd $shared710
@@ -81,8 +81,8 @@ mka aex -j$(nproc --all) | tee t715-log.txt
 cd $t715
 ls -al
 filename715=$(basename *gts28ltexx*.zip) 
-mv -v $BUILDd/t715-log.txt $shared715/$filename715.log
-mv -v $BUILDd/repo.log $shared715/$filename715.repo.log
+cp -v $BUILDd/t715-log.txt $shared715/$filename715.log
+cp -v $BUILDd/repo-tabs2.log $shared715/$filename715.repo.log
 mv -v  $715k/Image $shared715/$filename715.img
 mv -v  $filename715*  $shared715
 cd $shared715
@@ -97,8 +97,8 @@ mka aex -j$(nproc --all) | tee t810-log.txt
 cd $t810
 ls -al
 filename810=$(basename *gts210wifi*.zip) 
-mv -v $BUILDd/t810-log.txt $shared810/$filename810.log
-mv -v $BUILDd/repo.log $shared810/$filename810.repo.log
+cp -v $BUILDd/t810-log.txt $shared810/$filename810.log
+cp -v $BUILDd/repo-tabs2.log $shared810/$filename810.repo.log
 mv -v  $810k/Image $shared810/$filename810.img
 mv -v  $filename810*  $shared810
 cd $shared810
@@ -114,8 +114,8 @@ mka aex -j$(nproc --all) | tee t815-log.txt
 cd $t815
 ls -al
 filename815=$(basename *gts210ltexx*.zip) 
-mv -v $BUILDd/t815-log.txt $shared815/$filename.log
-mv -v $BUILDd/repo.log $shared815/$filename.repo.log
+cp -v $BUILDd/t815-log.txt $shared815/$filename.log
+cp -v $BUILDd/repo-tabs2.log $shared815/$filename.repo.log
 mv -v  $815k/Image $shared815/$filename815.img
 mv -v  $filename815*  $shared815
 cd $shared815

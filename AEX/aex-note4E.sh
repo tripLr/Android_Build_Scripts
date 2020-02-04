@@ -53,7 +53,7 @@ cd $BUILDd
 rm -v $ROOMd/*.xml
 # install from web roomservice
 wget -O $ROOMd/AEX.xml $ROOMs
-repo sync -c -j32 --force-sync --no-clone-bundle --no-tags | tee repo.log
+repo sync -c -j32 --force-sync --no-clone-bundle --no-tags | tee repo-note4E.log
 
 
 # set environment for build 

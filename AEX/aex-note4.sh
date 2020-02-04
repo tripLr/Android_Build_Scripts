@@ -54,7 +54,7 @@ cd $BUILDd
 rm -v $ROOMd/*.xml
 # install from web roomservice
 wget -O $ROOMd/AEX.xml $ROOMs
-~/bin/repo sync -c -j32 --force-sync --no-clone-bundle --no-tags | tee repo.log
+~/bin/repo sync -c -j32 --force-sync --no-clone-bundle --no-tags | tee repo-note4.log
 
 
 # set environment for build 
@@ -68,7 +68,7 @@ cd $AEXtrlte
 ls -al
 filename_trlte=$(basename *trlte*.zip) 
 cp -v $BUILDd/trlte-log.txt $sharedTR/$filename_trlte.log
-mv -v $BUILDd/repo.log $sharedTR/$filename_trlte.repo.log
+cp -v $BUILDd/repo-note4.log $sharedTR/$filename_trlte.repo.log
 mv -v  $filename_trlte*  $sharedTR
 mv -v $kernelTR/Image $sharedTR/$filename_trlte.img
 cd $sharedTR
