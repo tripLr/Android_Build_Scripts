@@ -113,7 +113,7 @@ gdrive upload --parent $AEXtrlteduosG $filename_duos
 gdrive upload --parent $AEXtrlteduosG $filename_duos.img 
 gdrive upload --parent $AEXtrlteduosG $filename_duos.md5sum 
 cd $BUILDd
-make clean
+#make clean
 
 echo '$filename_trlte uploaded'
 echo '$filename_tblte uploaded'

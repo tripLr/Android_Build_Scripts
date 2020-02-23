@@ -5,7 +5,7 @@
 # Server Specific compile settings
 . ~/bin/compile.sh
 . ~/bin/gdrive_aliases.sh
-. ../../repo-update.sh
+. ~/bin/repo-update.sh
 
 # Set build and directory parameters
 export BUILDd=~/android/9/AICP

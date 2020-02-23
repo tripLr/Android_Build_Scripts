@@ -12,7 +12,7 @@ if
 fi
 
 . ~/bin/gdrive_aliases.sh
-. ../../repo-update.sh
+. ~/bin/repo-update.sh
 
 # Set build and directory parameters
 export BUILDd=~/android/9/VIPER
@@ -110,4 +110,4 @@ gdrive upload --parent $VIPERtrlteduosG $filename
 gdrive upload --parent $VIPERtrlteduosG $filename.img 
 gdrive upload --parent $VIPERtrlteduosG $filename.md5sum
 cd $BUILDd
-make clean
+#make clean
