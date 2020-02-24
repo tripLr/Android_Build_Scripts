@@ -40,9 +40,10 @@ rm -v $ROOMd/*.xml
 
 cd $BUILDd
 # install from web roomservice
-wget -O $ROOMd/AICP.xml $ROOMs #https://raw.githubusercontent.com/triplr-dev/local_manifests/aokp-pie/master.xml
+wget -O $ROOMd/AICP.xml $ROOMs 
+#https://raw.githubusercontent.com/triplr-dev/local_manifests/aokp-pie/master.xml
 
-. ~/bin/repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags | tee repo.log &&
+. ~/bin/repo sync -c -j16 --force-sync --no-clone-bundle --no-tags | tee repo.log &&
 
 # set environment for build 
 . build/envsetup.sh
