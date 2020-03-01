@@ -4,15 +4,7 @@
 . ~/bin/compile.sh
 # call google drive folder variables
 # to upload builds to google drive triplr.dev shared account
-if 
-	[ -f ../gdrive_aliases.sh ];
-	  then
-	    cp -v ../gdrive_aliases.sh ~/bin/ ;  
-      	    echo 'file copied '
-	  else
-		echo 'file not found '
-fi
-
+. ~/bin/repo-update.sh
 . ~/bin/gdrive_aliases.sh
 
 # Set build and directory parameters
