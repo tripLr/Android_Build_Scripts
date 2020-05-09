@@ -25,18 +25,23 @@ export ROOMs=https://raw.githubusercontent.com/tripLr/local_manifests-1/aex-pie/
 #  tbelteskt    915S /home/shared/OUT_DIR/triplr/AEX/target/product/tbelteskt
 #  tre3calteskt 916S /home/shared/OUT_DIR/triplr/AEX/target/product/tre3calteskt
 
-export shared910C='/home/shared/triplr/builds/AEX910C'
-export shared910S='/home/shared/triplr/builds/AEX910S'
-export shared910U='/home/shared/triplr/builds/AEX910U'
-export shared915S='/home/shared/triplr/builds/AEX915S'
-export shared916S='/home/shared/triplr/builds/AEX916S'
+export shared910C=$shareD/AEX910C
+export shared910S=$shareD/AEX910S
+export shared910U=$shareD/AEX910U
+export shared915S=$shareD/AEX915S
+export shared916S=$shareD/AEX916S
 
 #  out dir's
 export out910C="$out_dir/AEX/target/product/treltexx"
+  export k910C="$out910C/obj/KERNEL_OBJ/arch/arm/boot"
 export out910S="$out_dir/AEX/target/product/trelteskt"
+  export k910S="$out910S/obj/KERNEL_OBJ/arch/arm/boot"
 export out910U="$out_dir/AEX/target/product/tphltexx"
+  export k910U="$out910U/obj/KERNEL_OBJ/arch/arm/boot"
 export out915S="$out_dir/AEX/target/product/tbelteskt"
+  export k915S="$out915S/obj/KERNEL_OBJ/arch/arm/boot"
 export out916S="$out_dir/AEX/target/product/tre3calteskt"
+  export k916S="$out916S/obj/KERNEL_OBJ/arch/arm/boot"
 
 # google drive folders
 export AEX910C='18GW22NU1S51N-eDMD_yoJhxwQ584efKW'
@@ -47,14 +52,13 @@ export AEX916S='1GceKAhc8-IA8gj_wrQllfac6c8G_NJUe'
 
 
 cd $BUILDd
-#make clean
 
 # remove room service files
 rm -v $ROOMd/*.xml
 # install from web roomservice
 wget -O $ROOMd/AEX.xml $ROOMs
-repo sync -c -j32 --force-sync --no-clone-bundle --no-tags | tee repo-note4E.log
-
+#repo sync -c -j32 --force-sync --no-clone-bundle --no-tags | tee repo-note4E.log
+REPO
 
 # set environment for build 
 . build/envsetup.sh
@@ -64,31 +68,37 @@ repo sync -c -j32 --force-sync --no-clone-bundle --no-tags | tee repo-note4E.log
 
 # build treltexx 910C
 lunch aosp_treltexx-userdebug
-mka aex -j$(nproc --all) | tee treltexx-log.txt
+mka aex -j10 | tee treltexx-log.txt
 
 cd $out910C 
 ls -al 
-filename910C=$(basename *treltexx*.zip)  
-cp -v $BUILDd/treltexx-log.txt $shared910C/$filename910C.log 
+filename910C=$(basename *-treltexx*.zip)  
+cp -v $BUILDd/treltexx-log.txt $shared910C/$filename910C.log
+cp -v $k910C/Image $shared910C/$filename910C.img 
 mv -v  $filename910C*  $shared910C 
 cd $shared910C 
 ls -al 
-gdrive upload --parent $AEX910C $filename910C & 
+gdrive upload --parent $AEX910C $filename910C 
+gdrive upload --parent $AEX910C $filename910C.md5sum 
+gdrive upload --parent $AEX910C $filename910C.img 
 
 cd $BUILDd
 
 # build trelteskt 910S
 lunch aosp_trelteskt-userdebug
-mka aex -j$(nproc --all) | tee trelteskt-log.txt
+mka aex -j5 | tee trelteskt-log.txt
 
 cd $out910S 
 ls -al 
-filename910S=$(basename *trelteskt*.zip) 
+filename910S=$(basename *-trelteskt*.zip) 
 cp -v $BUILDd/trelteskt-log.txt $shared910S/$filename910S.log
+cp -v $k910S/Image $shared910S/$filename910S.img
 mv -v  $filename910S*  $shared910S 
 cd $shared910S 
 ls -al 
-gdrive upload --parent $AEX910S $filename910S  &
+gdrive upload --parent $AEX910S $filename910S  
+gdrive upload --parent $AEX910S $filename910S.img  
+gdrive upload --parent $AEX910S $filename910S.md5sum  
 
 cd $BUILDd
 
@@ -116,12 +126,15 @@ mka aex -j$(nproc --all) | tee tbelteskt-log.txt
 
 cd $out915S
 ls -al 
-filename915S=$(basename *tbelteskt*.zip) 
+filename915S=$(basename *-tbelteskt*.zip) 
 cp -v $BUILDd/tbelteskt-log.txt $shared915S/$filename915S.log
+cp -v $k915S/Image $shared915S/$filename915S.img
 mv -v  $filename915S*  $shared915S 
 cd $shared915S 
 ls -al 
-gdrive upload --parent $AEX915S $filename915S  &
+gdrive upload --parent $AEX915S $filename915S 
+gdrive upload --parent $AEX915S $filename915S.img 
+gdrive upload --parent $AEX915S $filename915S.md5sum 
 
 
 
@@ -133,14 +146,17 @@ mka aex -j$(nproc --all) | tee tre3calteskt-log.txt
 
 cd $out916S
 ls -al 
-filename916S=$(basename *tre3calteskt*.zip) 
+filename916S=$(basename *-tre3calteskt*.zip) 
 cp -v $BUILDd/tre3calteskt-log.txt $shared916S/$filename916S.log
+cp -v $k916S/Image $shared916S/$filename916S.img
 mv -v  $filename916S*  $shared916S 
 cd $shared916S 
 ls -al 
-gdrive upload --parent $AEX910Sg $filename910U  
+gdrive upload --parent $AEX910Sg $filename916S  
+gdrive upload --parent $AEX910Sg $filename916S.img  
+gdrive upload --parent $AEX910Sg $filename916S.md5sum  
 cd $BUILDd 
-
+make clean
 
 # this combines all the below files into one build script
 #treltexx_910C.sh
