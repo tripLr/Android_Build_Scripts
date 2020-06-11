@@ -2,7 +2,7 @@
 
 
 export SCRIPTd=~/github/triplr/Build_Scripts/AEX
-export ANDROIDd=~/android/9/AEX
+export ANDROIDd=~/android/aex-9.x
 
 cd $ANDROIDd
 

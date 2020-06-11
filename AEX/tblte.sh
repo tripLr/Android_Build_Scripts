@@ -6,24 +6,11 @@
 
 # Server Specific compile settings
 
-. ~/bin/compile.sh
-
-
-# call google drive folder variables
-# to upload builds to google drive triplr.dev shared account
-if 
-        [ -f ../gdrive_aliases.sh ];
-          then
-            cp -v ../gdrive_aliases.sh ~/bin/ ;
-            echo 'file copied '
-          else
-                echo 'file not found '
-fi
 
 . ~/bin/gdrive_aliases.sh
 
 # Set build directory parameters
-export BUILDd=~/android/9/AEX
+export BUILDd=~/android/aex-9.x
 
 # Set roomservice dir and create if necessary
 export ROOMd=$BUILDd/.repo/local_manifests

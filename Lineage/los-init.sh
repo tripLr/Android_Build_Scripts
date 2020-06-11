@@ -7,7 +7,7 @@
 # ViperOS		repo init --depth=1 -u https://github.com/ViperOS/viper_manifest.git -b pie
 # xenon 		repo init --depth=1 -u https://github.com/TeamHorizon/platform_manifest.git -b p
 
-export BUILDd=~/android/LOS16
+export BUILDd=~/android/lineage-16.0
 export INITd=$BUILDd/.repo
 export ROOMd=$BUILDd/.repo/local_manifests
 export manifest='git://github.com/LineageOS/android.git -b lineage-16.0'

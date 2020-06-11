@@ -6,12 +6,10 @@
 
 # Server Specific compile settings
 
-. ~/bin/compile.sh
-
 . ~/bin/gdrive_aliases.sh
 
 # Set build directory parameters
-export BUILDd=~/android/9/AEX
+export BUILDd=~/android/aex-9.x
 
 # Set roomservice dir and create if necessary
 export ROOMd=$BUILDd/.repo/local_manifests
