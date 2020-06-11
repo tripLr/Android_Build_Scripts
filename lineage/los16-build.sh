@@ -1,3 +1,4 @@
+#!/bin/bash
 # Script to Build and Upload LOS16 TRLTE
 # Set Global Parameters
 # Server Specific compile settings
