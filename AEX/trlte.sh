@@ -8,17 +8,6 @@
 
 . ~/bin/compile.sh
 
-# call google drive folder variables
-# to upload builds to google drive triplr.dev shared account
-if 
-        [ -f ../gdrive_aliases.sh ];
-          then
-            cp -v ../gdrive_aliases.sh ~/bin/ ;
-            echo 'file copied '
-          else
-                echo 'file not found '
-fi
-
 . ~/bin/gdrive_aliases.sh
 
 # Set build directory parameters
@@ -35,6 +24,8 @@ if
          else
     echo ' roomservice dir exists ' 
 fi
+
+
 
 # set web location of roomservice for device
 export ROOMs=https://raw.githubusercontent.com/triplr-dev/local_manifests/aex-9.x/master.xml
@@ -66,6 +57,16 @@ fi
 ## build rom section
 
 cd $BUILDd
+
+if 
+	[ $1='clean' ]
+then 	
+	echo 'make clean in progress, please wait' ;
+	make clean;
+else	echo 'skipping make clean'
+fi
+
+
 
 # remove room service files
 rm -v $ROOMd/*.xml
