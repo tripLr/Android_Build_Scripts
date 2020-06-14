@@ -4,13 +4,6 @@
 
 cd $BUILDd
 
-# remove room service files
-rm -v $ROOMd/*.xml
-# install from web roomservice
-wget -O $ROOMd/LOS16.xml $ROOMs
-repo sync -c -j4 --force-sync --no-clone-bundle --no-tags | tee repo.log
-
-
 # set environment for build 
 . build/envsetup.sh
 
