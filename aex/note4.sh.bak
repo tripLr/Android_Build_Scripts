@@ -162,7 +162,12 @@ parameters
 roomservice
 envsetup
 trlte
+<<<<<<< HEAD
 tblte
 trlteduos
+=======
+#tblte
+#trlteduos
+>>>>>>> d781233c8040cf10b85d8057127cc4fd7b7d0bff
 upload_trlte
 #clean
