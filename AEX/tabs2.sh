@@ -23,8 +23,8 @@ fi
 . ~/bin/repo-update.sh
 
 # Set build and directory parameters
-export BUILDd=~/android/aex-9.x
-export ROOMd=~/android/aex-9.x/.repo/local_manifests
+export BUILDd=~/android/9/AEX
+export ROOMd=~/android/9/AEX/.repo/local_manifests
 if 
    [ ! -d $ROOMd ];
 	 then
