@@ -73,7 +73,7 @@ rm -v $ROOMd/*.xml
 
 # install from web roomservice
 wget -O $ROOMd/AEX.xml $ROOMs
-REPO
+repo sync -qc -j16 --force-sync --no-clone-bundle --no-tags
 
 # set environment for build 
 . build/envsetup.sh

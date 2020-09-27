@@ -5,7 +5,7 @@
 # Set Build Parameters
 
 # Server Specific compile settings
-
+# set .ccache dir, OUT_DIR ( common base )
 . ~/bin/compile.sh
 
 
@@ -73,7 +73,8 @@ rm -v $ROOMd/*.xml
 
 # install from web roomservice
 wget -O $ROOMd/AEX.xml $ROOMs
-REPO
+
+repo sync -qc -j16 --force-sync --no-clone-bundle --no-tags
 
 # set environment for build 
 . build/envsetup.sh
