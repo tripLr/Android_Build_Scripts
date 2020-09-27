@@ -16,7 +16,7 @@ export ROOMd=~/android/9/AEX/.repo/local_manifests
 export out_dir=$OUT_DIR_COMMON_BASE
 
 echo " using triplr room service for exynos master devices "
-export ROOMs=https://raw.githubusercontent.com/tripLr/local_manifests-1/aex-pie/exynos5433-master.xml
+export ROOMs=https://raw.githubusercontent.com/tripLr/local_manifests/aex-pie/5433master.xml
 
 # finished compiles to internal RAID storage on server
 #  treltexx     910C /home/shared/OUT_DIR/triplr/AEX/target/product/treltexx
