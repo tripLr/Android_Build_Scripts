@@ -52,9 +52,11 @@ export AEX916S='1GceKAhc8-IA8gj_wrQllfac6c8G_NJUe'
 
 
 cd $BUILDd
-
+make clean
 # remove room service files
 rm -v $ROOMd/*.xml
+repo sync -c -j32 --force-sync --no-clone-bundle --no-tags
+
 # install from web roomservice
 wget -O $ROOMd/AEX.xml $ROOMs
 #repo sync -c -j32 --force-sync --no-clone-bundle --no-tags | tee repo-note4E.log

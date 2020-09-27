@@ -1,13 +1,8 @@
 #!/bin/bash
-
 # Script to Build and Upload AEX Tab s2 710 715 810 815
-
 # Set Build Parameters
-
 # Server Specific compile settings
-
 . ~/bin/compile.sh
-
 # call google drive folder variables
 # to upload builds to google drive triplr.dev shared account
 if 
@@ -34,7 +29,7 @@ if
 fi
 
 export out_dir=$OUT_DIR_COMMON_BASE
-export ROOMs=https://raw.githubusercontent.com/tripLr/local_manifests/aex-pie/master5433.xml
+export ROOMs=https://raw.githubusercontent.com/tripLr/local_manifests/aex-pie/5433master.xml
 # 710,715,810,815 out
 # copy finished compiles to internal RAID storage on server
 
@@ -54,10 +49,11 @@ export t810k=$out_dir/AEX/target/product/gts210wifi/obj/KERNEL_OBJ/arch/arm/boot
 export t815k=$out_dir/AEX/target/product/gts210ltexx/obj/KERNEL_OBJ/arch/arm/boot
 
 cd $BUILDd
-
+make clean
 
 # remove room service files
 rm -v $ROOMd/*.xml
+repo sync -c -j32 --force-sync --no-clone-bundle --no-tags 
 # install from web roomservice
 wget -O $ROOMd/AEX.xml $ROOMs
 repo sync -c -j32 --force-sync --no-clone-bundle --no-tags | tee repo-tabs2.log

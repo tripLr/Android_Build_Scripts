@@ -65,9 +65,12 @@ fi
 ## build rom section
 
 cd $BUILDd
+echo make clean please wait
+make clean
 
-# remove room service files
+echo remove room service files
 rm -v $ROOMd/*.xml
+repo sync -qc -j16 --force-sync --no-clone-bundle --no-tags
 
 # install from web roomservice
 wget -O $ROOMd/AEX.xml $ROOMs
