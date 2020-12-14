@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 # Script to Build and Upload AEX Tab s2 710 715 810 815
 # Set Build Parameters
 # Server Specific compile settings
@@ -29,7 +30,7 @@ if
 fi
 
 export out_dir=$OUT_DIR_COMMON_BASE
-export ROOMs=https://raw.githubusercontent.com/tripLr/local_manifests/aex-pie/5433master.xml
+export ROOMs=https://raw.githubusercontent.com/tripLr/local_manifests/aex-pie/gts2master.xml
 # 710,715,810,815 out
 # copy finished compiles to internal RAID storage on server
 
