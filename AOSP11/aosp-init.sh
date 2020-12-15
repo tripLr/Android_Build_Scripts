@@ -1,26 +1,29 @@
 #!/bin/bash
-# AEX			repo init --depth=1 -u git://github.com/AospExtended/manifest.git -b 9.x
-# AICP			repo init --depth=1 -u https://github.com/AICP/platform_manifest.git -b p9.0
-# AOKP			repo init --depth=1 -u https://github.com/AOKP/platform_manifest.git -b pie
-# Google AOSP		repo init -u https://android.googlesource.com/platform/manifest
-# Google branch		repo init --depth=1 -u https://android.googlesource.com/platform/manifest -b android-9.0.0_r47
-# Google branch		repo init --depth=1 -u https://android.googlesource.com/platform/manifest -b android-10.0.0_r2
-# LineageOS		repo init --depth=1 -u git://github.com/LineageOS/android.git -b lineage-16.0
-# Pixel Expierence	repo init --depth=1 -u https://github.com/PixelExperience/manifest -b pie
-# ViperOS		repo init --depth=1 -u https://github.com/ViperOS/viper_manifest.git -b pie
-# xenon 		repo init --depth=1 -u https://github.com/TeamHorizon/platform_manifest.git -b p
 
-export BUILDd=~/android/AOSP10
+manifests='../ROM_MANIFESTS/manifests.sh'
+if 
+	[ -f $manifests ];
+		then
+			echo 'Loading Rom Manifests';
+			cat ../ROM_MANIFESTS/manifests.sh ;
+			. ../ROM_MANIFESTS/manifests.sh ;
+		else
+			echo 'manifests.sh does not exist';
+			
+fi
+			 
+
+export BUILDd=~/android/AOSP-11.x
 export INITd=$BUILDd/.repo
 export ROOMd=$BUILDd/.repo/local_manifests
-#
 
 if 
    [ ! -d $INITd ];
    	then
 	mkdir -pv $INITd;
-	repo init --depth=1 -u https://android.googlesource.com/platform/manifest -b android-10.0.0_r2 ;
-	repo sync -c --force-sync --no-clone-bundle --no-tags	;
+	cd $BUILDd ;
+	repo init --depth=1 -u $initAOSP ;
+	repo sync -c -j32 --force-sync --no-clone-bundle --no-tags	;
 	echo "REPO init and sync complete"		
          else
     echo ' repo dir exists ' 

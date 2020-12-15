@@ -22,7 +22,7 @@ if
    	then
 	mkdir -pv $INITd;
 	cd $BUILDd ;
-	repo init --depth=1 -u $initAEX ;
+	repo init --depth=1 -u $initAICP ;
 	repo sync -c -j32 --force-sync --no-clone-bundle --no-tags	;
 	echo "REPO init and sync complete"		
          else
