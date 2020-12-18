@@ -1,5 +1,5 @@
 # Build_Scripts
-Android Build Scripts for my Fedora Server 31 
+Android Build Scripts for my Fedora Server 33 
 
 Here is how it works,
 
