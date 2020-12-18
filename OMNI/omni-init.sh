@@ -13,7 +13,7 @@ if
 fi
 			 
 
-export BUILDd=~/android/AOSP-11.x
+export BUILDd=~/android/OMNI-11.x
 export INITd=$BUILDd/.repo
 export ROOMd=$BUILDd/.repo/local_manifests
 
@@ -22,7 +22,7 @@ if
    	then
 	mkdir -pv $INITd;
 	cd $BUILDd ;
-	repo init --depth=1 -u $initAOSP ;
+	repo init --depth=1 -u $initOMNI ;
 	repo sync -c -j32 --force-sync --no-clone-bundle --no-tags	;
 	echo "REPO init and sync complete"		
          else

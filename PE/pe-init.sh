@@ -5,15 +5,15 @@ if
 	[ -f $manifests ];
 		then
 			echo 'Loading Rom Manifests';
-			cat ../ROM_MANIFESTS/manifests.sh ;
-			. ../ROM_MANIFESTS/manifests.sh ;
+			cat $manifests ;
+			. $manifests ;
 		else
 			echo 'manifests.sh does not exist';
 			
 fi
 			 
 
-export BUILDd=~/android/AOSP-11.x
+export BUILDd=~/android/PEplus-11.x
 export INITd=$BUILDd/.repo
 export ROOMd=$BUILDd/.repo/local_manifests
 
@@ -22,7 +22,7 @@ if
    	then
 	mkdir -pv $INITd;
 	cd $BUILDd ;
-	repo init --depth=1 -u $initAOSP ;
+	repo init --depth=1 -u $initPixelPlus ;
 	repo sync -c -j32 --force-sync --no-clone-bundle --no-tags	;
 	echo "REPO init and sync complete"		
          else
