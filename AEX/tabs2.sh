@@ -29,7 +29,7 @@ if
 fi
 
 export out_dir=$OUT_DIR_COMMON_BASE
-export ROOMs=https://raw.githubusercontent.com/tripLr/local_manifests/aex-pie/5433master.xml
+export ROOMs=https://raw.githubusercontent.com/tripLr/manifests/9.x/exynos5433/gts2-aex.xml
 # 710,715,810,815 out
 # copy finished compiles to internal RAID storage on server
 
